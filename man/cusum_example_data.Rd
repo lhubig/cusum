@@ -4,7 +4,7 @@
 \name{cusum_example_data}
 \alias{cusum_example_data}
 \title{Non-Risk-adjusted Performance Data}
-\format{A data frame with 33270 rows and 3 variables:
+\format{A data frame with 2000 rows and 3 variables:
 \describe{
   \item{t}{Temporal sequence of observations}
   \item{y}{Patient outcome}
@@ -17,6 +17,6 @@ Decription of performance indicator (in German): \url{https://iqtig.org/download
 cusum_example_data
 }
 \description{
-Performance data of indicator 54030: Preoperative stay more than 24 hours for patients with proximal femur fracture for Bavarian hospitals in the years 2016-2017.
+Generated performance data of indicator 54030: Preoperative stay over 24 hours for patients with proximal femur fracture for Bavarian hospitals in the years 2016-2017.
 }
 \keyword{datasets}

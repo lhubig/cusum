@@ -1,8 +1,8 @@
 #' Risk-adjusted Performance Data
 #'
-#' Performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery for Bavarian hospitals in the years 2016-2017.
+#' Generated performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery for Bavarian hospitals in the years 2016-2017.
 #'
-#' @format A data frame with 12018 rows and 4 variables:
+#' @format A data frame with 2000 rows and 4 variables:
 #' \describe{
 #'   \item{t}{Temporal sequence of observations}
 #'   \item{y}{Patient outcome}
@@ -14,9 +14,9 @@
 
 #' Non-Risk-adjusted Performance Data
 #'
-#' Performance data of indicator 54030: Preoperative stay more than 24 hours for patients with proximal femur fracture for Bavarian hospitals in the years 2016-2017.
-#'
-#' @format A data frame with 33270 rows and 3 variables:
+#' Generated performance data of indicator 54030: Preoperative stay over 24 hours for patients with proximal femur fracture for Bavarian hospitals in the years 2016-2017.
+#' 
+#' @format A data frame with 2000 rows and 3 variables:
 #' \describe{
 #'   \item{t}{Temporal sequence of observations}
 #'   \item{y}{Patient outcome}

@@ -4,7 +4,7 @@
 \name{racusum_example_data}
 \alias{racusum_example_data}
 \title{Risk-adjusted Performance Data}
-\format{A data frame with 12018 rows and 4 variables:
+\format{A data frame with 2000 rows and 4 variables:
 \describe{
   \item{t}{Temporal sequence of observations}
   \item{y}{Patient outcome}
@@ -18,6 +18,6 @@ Decription of performance indicator (in German): \url{https://iqtig.org/download
 racusum_example_data
 }
 \description{
-Performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery for Bavarian hospitals in the years 2016-2017.
+Generated performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery for Bavarian hospitals in the years 2016-2017.
 }
 \keyword{datasets}
