@@ -12,7 +12,7 @@
 #' @param reset Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE
 #' @examples
 #'
-#' # control limit can be obtained with cusum_CL_sim(),
+#' # control limit can be obtained with cusum_limit_sim(),
 #' # here it is set to an arbitrary value (2.96)
 #' 
 #' # CUSUM of in-control process
