@@ -10,29 +10,31 @@ cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
 \arguments{
 \item{failure_probability}{Accepted failure probability of process}
 
-\item{patient_outcomes}{Patient outcomes vector in logical format (TRUE = event, FALSE = no event)}
+\item{patient_outcomes}{Vector of patient outcomes in logical format (TRUE = event, FALSE = no event)}
 
-\item{limit}{Control limit to signal deterioration}
+\item{limit}{Control limit to signal process deterioration}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2}
 
-\item{reset}{Resets the CUSUM after a signal to 0 if TRUE}
+\item{reset}{Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE}
 }
 \description{
 Calculate non-risk-adjusted CUSUM charts for performance data
 }
 \examples{
 
+# control limit can be obtained with cusum_CL_sim(),
+# here it is set to an arbitrary value (2.96)
+
 # CUSUM of in-control process
 # simulate patient outcomes
 set.seed(2046)
 patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.05))
 
+
 cs_ic <- cusum(failure_probability = 0.05,
     patient_outcomes,
-    limit = 2.96,
-    odds_multiplier = 2,
-    reset = TRUE)
+    limit = 2.96)
 
 # CUSUM of out-of-control process
 # simulate patient outcome
@@ -41,7 +43,5 @@ patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.2))
 
 cs_oc <- cusum(failure_probability = 0.05,
     patient_outcomes,
-    limit = 2.96,
-    odds_multiplier = 2,
-    reset = TRUE)
+    limit = 2.96)
 }
