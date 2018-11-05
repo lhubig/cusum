@@ -4,21 +4,21 @@
 \alias{cusum_alpha_sim}
 \title{Simulate false signal probability alpha given control limit for CUSUM charts}
 \usage{
-cusum_alpha_sim(failure_probability, n_patients, delta, n_simulation,
-  limit, seed = NULL)
+cusum_alpha_sim(failure_probability, n_patients, odds_multiplier,
+  n_simulation, limit, seed = NULL)
 }
 \arguments{
 \item{failure_probability}{Accepted failure probability of process}
 
 \item{n_patients}{Sample size}
 
+\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+
 \item{n_simulation}{Number of simulations}
 
 \item{limit}{Control limit to signal process deterioration}
 
 \item{seed}{Add an optional seed for simulation}
-
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
 }
 \value{
 Returns false signal probability alpha

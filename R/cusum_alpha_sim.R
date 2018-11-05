@@ -24,7 +24,7 @@
 #'     limit = 2.96,
 #'     seed = 2046)
 
-cusum_alpha_sim <- function(failure_probability, n_patients, delta, n_simulation, limit, seed = NULL) {
+cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_simulation, limit, seed = NULL) {
 
   ## Check user input ####
   assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
@@ -36,12 +36,12 @@ cusum_alpha_sim <- function(failure_probability, n_patients, delta, n_simulation
   n <- as.integer(n_patients)
   assert_integer(n, lower = 1, any.missing = FALSE, len = 1)
 
-  assert_numeric(delta, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
-  if (delta < 1) {
-    message("CUSUM detects process improvements (delta < 1). ")
+  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  if (odds_multiplier < 1) {
+    message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
-  if (delta == 1) {
-    warning("CUSUM detects no process change (delta = 1).")
+  if (odds_multiplier == 1) {
+    warning("CUSUM detects no process change (odds_multiplier = 1).")
   }
 
   assert_numeric(n_simulation, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
@@ -51,7 +51,7 @@ cusum_alpha_sim <- function(failure_probability, n_patients, delta, n_simulation
   assert_numeric(as.numeric(seed), lower = 0, max.len = 1)
 
   ## Simulate CUSUM Charts ####
-  cs_sim <- function(i, npat = n, p = failure_probability, or = delta) {
+  cs_sim <- function(i, npat = n, p = failure_probability, or = odds_multiplier) {
     p.0 <- p
     o.0 <- p.0 / (1 - p.0)
     o.1 <- o.0 * or
