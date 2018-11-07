@@ -10,9 +10,9 @@ cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
 \arguments{
 \item{failure_probability}{Accepted failure probability of process}
 
-\item{patient_outcomes}{Vector of patient outcomes in logical format (TRUE = event, FALSE = no event)}
+\item{patient_outcomes}{A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)}
 
-\item{limit}{Control limit to signal process deterioration}
+\item{limit}{Control limit to signal process deterioration.}
 
 \item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2}
 

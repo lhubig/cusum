@@ -18,7 +18,7 @@ cusum_alpha_sim(failure_probability, n_patients, odds_multiplier,
 
 \item{limit}{Control limit to signal process deterioration}
 
-\item{seed}{Add an optional seed for simulation}
+\item{seed}{An optional seed for simulation}
 }
 \value{
 Returns false signal probability alpha

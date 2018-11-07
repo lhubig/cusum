@@ -18,7 +18,7 @@ cusum_limit_sim(failure_probability, n_patients, odds_multiplier,
 
 \item{alpha}{False signal probability}
 
-\item{seed}{Add an optional seed for simulation}
+\item{seed}{An optional seed for simulation}
 }
 \value{
 Returns the CL

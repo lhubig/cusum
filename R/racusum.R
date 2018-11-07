@@ -5,8 +5,8 @@
 #' @import checkmate
 #' @import stats
 #' @import graphics
-#' @param patient_risks Vector of patient risk scores
-#' @param patient_outcomes Vector of patient outcomes in logical format (TRUE = event, FALSE = no event)
+#' @param patient_risks A vector containing patient risk scores
+#' @param patient_outcomes A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)
 #' @param limit Control limit to signal process deterioration
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
 #' @param reset Resets the CUSUM after a signal to 0; defaults to TRUE

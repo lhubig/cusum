@@ -3,11 +3,11 @@
 #' @export
 #' @import checkmate
 #' @import stats
-#' @param patient_risks Vector of failure probabilities
+#' @param patient_risks A vector containing patient risk scores
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
 #' @param n_simulation Number of simulations
 #' @param limit Control limit to signal process deterioration
-#' @param seed Add an optional seed for simulation
+#' @param seed An optional seed for simulation
 #' @return Returns false signal probability
 #' @examples
 #'

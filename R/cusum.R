@@ -6,8 +6,8 @@
 #' @import stats
 #' @import graphics
 #' @param failure_probability Accepted failure probability of process
-#' @param patient_outcomes Vector of patient outcomes in logical format (TRUE = event, FALSE = no event)
-#' @param limit Control limit to signal process deterioration
+#' @param patient_outcomes A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)
+#' @param limit Control limit to signal process deterioration. 
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
 #' @param reset Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE
 #' @examples

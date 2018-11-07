@@ -8,7 +8,7 @@ racusum_limit_sim(patient_risks, odds_multiplier, n_simulation, alpha,
   seed = NULL)
 }
 \arguments{
-\item{patient_risks}{Vector of failure probabilities}
+\item{patient_risks}{A vector containing patient risk scores}
 
 \item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
 
@@ -16,7 +16,7 @@ racusum_limit_sim(patient_risks, odds_multiplier, n_simulation, alpha,
 
 \item{alpha}{False signal probability}
 
-\item{seed}{Add an optional seed for simulation}
+\item{seed}{An optional seed for simulation}
 }
 \value{
 Returns the control limit

@@ -8,9 +8,9 @@ racusum(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   reset = TRUE)
 }
 \arguments{
-\item{patient_risks}{Vector of patient risk scores}
+\item{patient_risks}{A vector containing patient risk scores}
 
-\item{patient_outcomes}{Vector of patient outcomes in logical format (TRUE = event, FALSE = no event)}
+\item{patient_outcomes}{A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)}
 
 \item{limit}{Control limit to signal process deterioration}
 
