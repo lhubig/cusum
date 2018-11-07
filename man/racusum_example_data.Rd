@@ -6,18 +6,19 @@
 \title{Risk-adjusted Performance Data}
 \format{A data frame with 2000 rows and 4 variables:
 \describe{
-  \item{t}{Temporal sequence of observations}
+  \item{t}{Sequence of observations}
   \item{y}{Patient outcome}
   \item{score}{Patient risk score}
   \item{year}{Year of treatment}
 }}
 \source{
-Decription of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
+Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany. Decription of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
 }
 \usage{
 racusum_example_data
 }
 \description{
-Generated performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery for Bavarian hospitals in the years 2016-2017.
+Generated performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery.
+Individual patient risk scores were drawn from actual hospital data and patient outcomes were simulated. Two years are provided, so Phase I and Phase II can be defined.
 }
 \keyword{datasets}
