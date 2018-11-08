@@ -1,5 +1,5 @@
 Package: cusum
-Title: USUM Charts for Monitoring of Hospital Performance
+Title: CUSUM Charts for Monitoring of Hospital Performance
 Version: 0.1.0
 Authors@R: c(
     person("Lena", "Hubig", 
