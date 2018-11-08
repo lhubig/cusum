@@ -11,6 +11,8 @@
   \item{year}{Year of treatment}
 }}
 \source{
+Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany. 
+
 Decription of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/17n1hftfrak/QSKH_17n1-HUEFTFRAK_2016_QIDB_V02_2017-04-26.pdf}
 }
 \usage{
@@ -18,6 +20,8 @@ cusum_example_data
 }
 \description{
 Generated performance data of indicator 17/1 54030: Preoperative stay over 24 hours for patients with proximal femur fracture.
+}
+\details{
 Patient outcomes were simulated based on average national failure rate. Two years are provided, so Phase I and Phase II can be defined.
 }
 \keyword{datasets}
