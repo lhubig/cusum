@@ -1,23 +1,25 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-cusum
-=====
 
-The goal of cusum is to provide functions for constructing and evaluating CUSUM and RA-CUSUM charts for hospital performance data.
+# cusum
 
-Installation
-------------
+The goal of cusum is to provide functions for constructing and
+evaluating CUSUM charts and RA-CUSUM charts with focus on false signal
+probability.
 
-You can install the released version of cusum from [CRAN](https://CRAN.R-project.org) with:
+## Installation
+
+You can install the released version of cusum from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("cusum")
 ```
 
-Example
--------
+## Example
 
-This is a basic example which shows you how to construct CUSUM charts with simulated control limits:
+This is a basic example which shows you how to construct CUSUM charts
+with simulated control limits:
 
 ``` r
 library(cusum)
