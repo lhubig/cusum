@@ -10,6 +10,7 @@
 #' @param limit Control limit to signal process deterioration
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
 #' @param reset Resets the CUSUM after a signal to 0; defaults to TRUE
+#' @param plot Add optional CUSUM plot if TRUE; defaults to FALSE
 #' @examples
 #' # Patients risks are usually known from Phase I.
 #' # If not, these risk scores can be simulated.
@@ -46,7 +47,7 @@
 #'     limit = 2.96)
 #'
 
-racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE) {
+racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE, plot = TRUE) {
 
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
@@ -64,7 +65,9 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   }
 
   assert_logical(reset, any.missing = FALSE, len = 1)
-
+  
+  assert_logical(plot, any.missing = FALSE, len = 1)
+  
   ## Calculate RA-CUSUM Chart ####
   npat <- length(patient_risks)
 
@@ -99,11 +102,14 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   cs <- as.data.frame(cs)
   names(cs) <- c("t", "p", "ct", "signal", "limit")
 
-  plot(cs$t, cs$ct,
-    type = "l",
-    xlab = "t", ylab = "C[t]", ylim = c(0, limit * 1.25)
-  )
-  abline(h = limit, col = "blue")
+  if (plot == TRUE){
+    plot(cs$t, cs$ct,
+         type = "l",
+         xlab = "t", ylab = "C[t]", ylim = c(0, limit * 1.25)
+    )
+    abline(h = limit, col = "blue")
+  }
+
 
   return(cs)
 }

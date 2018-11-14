@@ -5,7 +5,7 @@
 \title{Non-risk-adjusted CUSUM Charts}
 \usage{
 cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
-  reset = TRUE)
+  reset = TRUE, plot = FALSE)
 }
 \arguments{
 \item{failure_probability}{Accepted failure probability of process}
@@ -17,6 +17,8 @@ cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
 \item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2}
 
 \item{reset}{Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE}
+
+\item{plot}{Add optional CUSUM plot if TRUE; defaults to FALSE}
 }
 \description{
 Calculate non-risk-adjusted CUSUM charts for performance data

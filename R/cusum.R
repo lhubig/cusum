@@ -10,6 +10,7 @@
 #' @param limit Control limit to signal process deterioration. 
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
 #' @param reset Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE
+#' @param plot Add optional CUSUM plot if TRUE; defaults to FALSE
 #' @examples
 #'
 #' # control limit can be obtained with cusum_limit_sim(),
@@ -34,7 +35,7 @@
 #'     patient_outcomes,
 #'     limit = 2.96)
 
-cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE) {
+cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE, plot = FALSE) {
 
   ## Check user input ####
   assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
@@ -56,6 +57,8 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   }
 
   assert_logical(reset, any.missing = FALSE, len = 1)
+  
+  assert_logical(plot, any.missing = FALSE, len = 1)
 
   ## Calculate CUSUM Chart ####
   npat <- length(patient_outcomes)
@@ -95,11 +98,14 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   cs <- as.data.frame(cs)
   names(cs) <- c("t", "failure_probability", "ct", "signal", "limit")
 
-  plot(cs$t, cs$ct,
-    type = "l",
-    xlab = "t", ylab = "C[t]", ylim = c(0, limit * 1.25)
-  )
-  abline(h = limit, col = "blue")
+  if (plot == TRUE){
+    plot(cs$t, cs$ct,
+         type = "l",
+         xlab = "t", ylab = "C[t]", ylim = c(0, limit * 1.25)
+    )
+    abline(h = limit, col = "blue")
+  }
+ 
 
   return(cs)
 }
