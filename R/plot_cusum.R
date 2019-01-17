@@ -1,0 +1,39 @@
+#' Plot CUSUM chart for a cusum Object
+#'
+#' Produces a CUSUM chart. 
+#' @export
+#' @usage 
+#' ## S3 method for class 'cusum'
+#' plot(x, signal = TRUE, ...)
+#' 
+#' @param x An object of class cusum
+#' @param signal If TRUE, signals are plotted (default)
+#' @examples
+#'     
+
+plot.cusum <- function(x, signal = TRUE, ...) {
+  
+  plot(x = x$t, 
+       y = x$ct, 
+       type = "l",
+       xlim = c(0,max(x$t)),
+       ylim = c(0, max(x$ct)), 
+       ylab = expression(CUSUM[t]), xlab = "t",
+       ...)
+    
+  if (signal == TRUE){
+    points(x = x$t[x$signal == 1], 
+           y = x$ct[x$signal == 1], 
+           col = "red", 
+           cex = 2.5, 
+           pch = 8,
+           lwd = 5)
+  }
+
+  abline(h = unique(x$limit), col = "Blue")
+  points(x = x$t, 
+         y = x$ct, 
+         pch = 16)
+?p
+  
+}
