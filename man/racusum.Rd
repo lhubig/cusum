@@ -5,7 +5,7 @@
 \title{Risk-adjusted CUSUM Charts}
 \usage{
 racusum(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
-  reset = TRUE, plot = TRUE)
+  reset = TRUE)
 }
 \arguments{
 \item{patient_risks}{A vector containing patient risk scores}
@@ -17,8 +17,6 @@ racusum(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
 \item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2}
 
 \item{reset}{Resets the CUSUM after a signal to 0; defaults to TRUE}
-
-\item{plot}{Add optional CUSUM plot if TRUE; defaults to FALSE}
 }
 \description{
 Calculate risk-adjusted CUSUM charts for performance data

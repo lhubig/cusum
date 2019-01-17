@@ -57,8 +57,6 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
 
   assert_logical(reset, any.missing = FALSE, len = 1)
   
-  assert_logical(plot, any.missing = FALSE, len = 1)
-
   ## Calculate CUSUM Chart ####
   npat <- length(patient_outcomes)
 

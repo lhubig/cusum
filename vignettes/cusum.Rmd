@@ -129,6 +129,8 @@ cusum_cs <- cusum(
   reset = TRUE)
   
 head(cusum_cs)
+
+#plot(cusum_cs)
 ```
 
 ### Evaluating CUSUM charts
@@ -184,7 +186,7 @@ racusum_cs <- racusum(patient_risks,
                       limit = racusum_limit,
                       odds_multiplier = 2,
                       reset = FALSE)
-
+#plot(racusum_cs)
 head(racusum_cs)
 ```
 
