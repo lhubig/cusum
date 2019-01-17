@@ -2,14 +2,12 @@
 #'
 #' Produces a CUSUM chart. 
 #' @export
-#' @usage 
-#' ## S3 method for class 'cusum'
-#' plot(x, signal = TRUE, ...)
-#' 
+#' @import utils
 #' @param x An object of class cusum
 #' @param signal If TRUE, signals are plotted (default)
-#' @examples
-#'     
+#' @method plot 
+#' @usage ## S3 method for class 'cusum' plot(x, signal = TRUE, ...)
+
 
 plot.cusum <- function(x, signal = TRUE, ...) {
   
@@ -34,6 +32,4 @@ plot.cusum <- function(x, signal = TRUE, ...) {
   points(x = x$t, 
          y = x$ct, 
          pch = 16)
-?p
-  
 }

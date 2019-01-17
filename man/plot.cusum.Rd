@@ -4,8 +4,7 @@
 \alias{plot.cusum}
 \title{Plot CUSUM chart for a cusum Object}
 \usage{
-## S3 method for class 'cusum'
-plot(x, signal = TRUE, ...)
+## S3 method for class 'cusum' plot(x, signal = TRUE, ...)
 }
 \arguments{
 \item{x}{An object of class cusum}
@@ -14,7 +13,4 @@ plot(x, signal = TRUE, ...)
 }
 \description{
 Produces a CUSUM chart.
-}
-\examples{
-    
 }
