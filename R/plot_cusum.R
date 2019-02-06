@@ -5,7 +5,7 @@
 #' @import utils
 #' @param x An object of class cusum
 #' @param signal If TRUE, signals are plotted (default)
-#' @method plot 
+#' @method plot cusum
 #' @usage ## S3 method for class 'cusum' plot(x, signal = TRUE, ...)
 
 
