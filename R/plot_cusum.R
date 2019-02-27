@@ -13,7 +13,7 @@ plot.cusum <- function(x, signal = TRUE, ...) {
   
   plot(x = x$t, 
        y = x$ct, 
-       type = "l",
+       type = "n",
        xlim = c(0,max(x$t)),
        ylim = c(0, max(x$ct)), 
        ylab = expression(CUSUM[t]), xlab = "t",
@@ -23,13 +23,17 @@ plot.cusum <- function(x, signal = TRUE, ...) {
     points(x = x$t[x$signal == 1], 
            y = x$ct[x$signal == 1], 
            col = "red", 
-           cex = 2.5, 
+           cex = 2, 
            pch = 8,
            lwd = 5)
   }
-
+  
+  lines(x = x$t, 
+        y = x$ct)
+  
   abline(h = unique(x$limit), col = "Blue")
   points(x = x$t, 
          y = x$ct, 
+         cex = .5,
          pch = 16)
 }
