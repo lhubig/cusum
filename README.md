@@ -39,6 +39,8 @@ cs <- cusum(failure_probability = 0.05,
             patient_outcomes,
             limit,
             odds_multiplier = 2)
+
+plot(cs)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
