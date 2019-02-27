@@ -95,7 +95,7 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   cs <- as.data.frame(cs)
   names(cs) <- c("t", "failure_probability", "ct", "signal", "limit")
 
-  class(cs) <- "cusum"
+  class(cs) <- c("cusum", "data.frame")
   
   return(cs)
 }
