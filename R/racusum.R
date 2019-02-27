@@ -99,7 +99,7 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   cs <- as.data.frame(cs)
   names(cs) <- c("t", "p", "ct", "signal", "limit")
 
-  class(cs) <- "cusum"
+  class(cs) <- c("cusum", "data.frame")
 
 
   return(cs)
