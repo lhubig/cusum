@@ -78,7 +78,8 @@ racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alph
     for (i in 2:n) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
     return(max(c.t))
   }
-
+  suppressWarnings(RNGversion("3.5.0"))
+  
   set.seed(seed)
   rl <- lapply(1:n_simulation, cs_sim)
 
