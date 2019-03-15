@@ -40,7 +40,7 @@ The control limit depends on a number of variables:
 * number of simulations
 
 ## Motivating example
-To illustrate how **cusum** can be used for monitoring, we employ a simple and artifical data set generated to closely follow the performance data of German hospitals for one non-risk-adjusted performance indicator and one risk-adjusted performance indicator in 2016 and 2017.
+To illustrate how **cusum** can be used for monitoring, we employ a simple and artificial data set generated to closely follow the performance data of German hospitals for one non-risk-adjusted performance indicator and one risk-adjusted performance indicator in 2016 and 2017.
 
 risk-adj. | Indicator Description | Further explanation (in German)
 --------- | --------------------  | ---------------------------------
@@ -133,7 +133,7 @@ plot(cusum_cs)
 ```
 
 ### Evaluating CUSUM charts
-The false signal probabilty of a CUSUM chart can be simulated using _cusum_alpha_sim_ given a pre-defined control limit.
+The false signal probability of a CUSUM chart can be simulated using _cusum_alpha_sim_ given a predefined control limit.
 
 ```{r}
 n_patients <- nrow(cusum_example_p2)
@@ -204,7 +204,7 @@ plot(racusum_cs)
 
 
 ### Evaluating RA-CUSUM charts
-The false signal probabilty of a CUSUM chart can be simulated using _cusum_alpha_sim_.
+The false signal probability of a CUSUM chart can be simulated using _cusum_alpha_sim_.
 
 ```{r}
 racusum_alpha <- racusum_alpha_sim(

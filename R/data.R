@@ -12,7 +12,7 @@
 #' }
 #' @source Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany. 
 #' 
-#' Decription of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/17n1hftfrak/QSKH_17n1-HUEFTFRAK_2016_QIDB_V02_2017-04-26.pdf}
+#' Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/17n1hftfrak/QSKH_17n1-HUEFTFRAK_2016_QIDB_V02_2017-04-26.pdf}
 "cusum_example_data"
 
 #' Risk-adjusted Performance Data
@@ -31,5 +31,5 @@
 #' 
 #' @source Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany. 
 #' 
-#' Decription of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
+#' Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
 "racusum_example_data"
