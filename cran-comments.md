@@ -1,7 +1,7 @@
 ---
 title: "cran-comments"
 author: "Lena Hubig"
-date: "8 November 2018"
+date: "15 March 2019"
 output: html_document
 ---
 ## Test environments
