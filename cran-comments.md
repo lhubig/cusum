@@ -10,7 +10,15 @@ output: html_document
 * win-builder (devel) 
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs
+There were no ERRORs or WARNINGs
+
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+  Maintainer: 'Lena Hubig <cs@lenahubig.de>'
+  Days since last update: 4
+ 
+This is a fix of a bug in the released version.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
