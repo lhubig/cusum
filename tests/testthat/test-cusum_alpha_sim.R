@@ -2,7 +2,7 @@ context("cusum_alpha_sim")
 
 
 test_that("Output of alpha simulation", {
-  expected_results <- 0.039
+  expected_results <- 0.038
   works <- round(
     cusum_alpha_sim(
       failure_probability = 0.05,
