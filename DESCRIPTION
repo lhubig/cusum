@@ -1,6 +1,6 @@
 Package: cusum
 Title: CUSUM Charts for Monitoring of Hospital Performance
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Lena", "Hubig", 
     email = "cs@lenahubig.de", 
