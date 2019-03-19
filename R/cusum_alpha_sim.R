@@ -55,7 +55,7 @@ cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_
     p.0 <- p
     o.0 <- p.0 / (1 - p.0)
     o.1 <- o.0 * or
-    p.1 <- o.1 / (1 + 0.1)
+    p.1 <- o.1 / (1 + o.1)
 
     y <- rbinom(npat, 1, p.0)
     w.t <- y * log(p.1 / p.0) + (1 - y) * log((1 - p.1) / (1 - p.0))
