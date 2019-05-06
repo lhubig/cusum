@@ -10,14 +10,14 @@
 #' @examples
 #'
 #' # calculate exact control limits for alpha = 0.05
-#' cusum_limit_sim_exact(failure_probability = 0.05,
+#' cusum_limit_sim_exact(failure_probability = 0.1,
 #'     n_patients = 10,
 #'     odds_multiplier = 2,
 #'     alpha = 0.05)
 
 
 cusum_limit_sim_exact <- function(n_patients,
-                                    failure_probability,
+                                  failure_probability,
                                   odds_multiplier,
                                   alpha) {
   #
@@ -25,6 +25,29 @@ cusum_limit_sim_exact <- function(n_patients,
   # for a hospital with n_patients patients, the in control failure probability failure_probability
   # and the smallest inacceptable failure probability pA
   #
+  
+  assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
+  if (failure_probability > 0.5) {
+    failure_probability <- 1 - failure_probability
+    warning("Accepted failure probability failure_probability will be recoded to 1-failure_probability when > 0.5.")
+  }
+  
+  n_patients <- as.integer(n_patients)
+  assert_integer(n_patients, lower = 1, any.missing = FALSE, len = 1)
+  if (n_patients > 15){
+    message("Exact calculation only works for very small sample sizes of around <= 10 (check ?cusum_limit_sim_exact for more information). \nPlease abort if calculation takes to long. ")
+  }
+  
+  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  if (odds_multiplier < 1) {
+    message("CUSUM detects process improvements (odds_multiplier < 1). ")
+  }
+  if (odds_multiplier == 1) {
+    warning("CUSUM detects no process change (odds_multiplier = 1).")
+  }
+  
+  assert_numeric(alpha, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  
   
   p.0 <- failure_probability
   o.0 <- p.0 / (1 - p.0)

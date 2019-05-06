@@ -25,7 +25,7 @@ Calculate exact control limit given false signal probability alpha for CUSUM cha
 \examples{
 
 # calculate exact control limits for alpha = 0.05
-cusum_limit_sim_exact(failure_probability = 0.05,
+cusum_limit_sim_exact(failure_probability = 0.1,
     n_patients = 10,
     odds_multiplier = 2,
     alpha = 0.05)
