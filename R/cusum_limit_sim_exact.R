@@ -1,4 +1,7 @@
 #' Calculate exact control limit given false signal probability alpha for CUSUM charts for very small sample sizes
+#' 
+#' This function only works for very small sample sizes (<= 15), 
+#' as it permutes through all possible outcome sequences and estimates the percentage of runs that reach a specific CUSUM values.
 #'
 #' @export
 #' @import checkmate
