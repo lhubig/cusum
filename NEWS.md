@@ -1,3 +1,6 @@
+# cusum 0.3.0 (2019/05/08) ---- on github
+* new function to calculate CUSUM control limits exactly for very small sample sizes
+
 # cusum 0.2.1 (2019/03/19)
 
 ### Bug fixes
