@@ -15,7 +15,8 @@ LazyData: true
 Imports:
   stats,
   graphics,
-  checkmate
+  checkmate,
+  data.table
 Suggests:
     testthat,
     knitr,

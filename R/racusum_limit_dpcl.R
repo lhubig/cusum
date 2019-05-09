@@ -1,40 +1,45 @@
-library(data.table)
-
-racusum_limit_dpcl <- function(patient_risks, delta, delta_o, alpha, iter_sim, RA){
+#' Setting the Dynamic Probability Control Limits
+#' 
+#' Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts: DPCLs for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM. Quality and Reliability Engineering International. 10.1002/qre.2044. 
+#' 
+#' @export
+#' @import stats
+#' @import data.table
+#' @param patient_risks A vector containing patient risk scores
+#' @param N Number of simulations
+#' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
+#' @param alpha False signal probability
+#' @param seed An optional seed for simulation
+#' @return Returns the control limit
+#' 
+racusum_limit_dpcl <- function(patient_risks,N , odds_multiplier, alpha, seed){
   # function for setting the Dynamic Probability Control Limit for a defined population
   # p: vector of patient risk in order of observation
   # R1: odds multiplier for alternative hypothesis (=2)
-  # R: odds multiplier for null hypothesis (=1)
   # alpha: pre-specified false alarm rate (0.005)
   # N: large integer for simulation (50.000)
   # RA: if true= risk adjusted, if false leave R empty  
   
-
-  npat <- length(patient_risks)
+  delta_o <- 1
+  n_patients <- length(patient_risks)
   
-  hs <- matrix(0,nrow=npat,ncol=2 ) 
+  hs <- matrix(0,nrow=n_patients,ncol=2 ) 
   
   cs <- 0 # initial cusum value
   
   # loop over patients
-  for (j in 1:npat){
+  for (j in 1:n_patients){
     p1 <- patient_risks[j] # in control failure rate p
-    y1 <- rbinom(iter_sim,1,p1)  # generate N Bernoulli random variables with ic-failure p1
+    y1 <- rbinom(N,1,p1)  # generate N Bernoulli random variables with ic-failure p1
     
     # define weights
-    if (RA==TRUE){
-      ws <- log((1-p1+delta_o*p1)/(1-p1+delta*p1)) # survival
-      wf <- log(((1-p1+delta_o*p1)*delta)/((1-p1+delta*p1)*delta_o)) # failure
-    } else {
-      c0 <- mean(patient_risks)
-      ca <- ifelse (patient_risks<0.5, delta*patient_risks, 1-((1-patient_risks)*delta))
-      ws <- log((1-ca)/(1-c0))
-      wf <- log(ca/c0)
-    }
-    css <- matrix(0,nrow=iter_sim,ncol=2)
+      ws <- log((1-p1+delta_o*p1)/(1-p1+odds_multiplier*p1)) # survival
+      wf <- log(((1-p1+delta_o*p1)*odds_multiplier)/((1-p1+odds_multiplier*p1)*delta_o)) # failure
+  
+    css <- matrix(0,nrow=N,ncol=2)
     
     # generate N CUSUM statistics
-    for (i in 1:iter_sim){
+    for (i in 1:N){
       if(j!=1){
         cs <- sample(c,1)
       } else{
@@ -49,7 +54,7 @@ racusum_limit_dpcl <- function(patient_risks, delta, delta_o, alpha, iter_sim, R
     css <- data.table(css, key="V2") # sort CUSUM statistics in ascending order
     
     # take upper percentile as h
-    m <- floor(iter_sim * (1 - alpha))
+    m <- floor(N * (1 - alpha))
     
     h <- css$V2[m]
     hs[j,] <- c(j,h) 
