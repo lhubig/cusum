@@ -1,7 +1,7 @@
-#' Setting the Dynamic Probability Control Limits
+#' Dynamic Probability Control Limits (DPCL)
 #'
 #'
-#'
+#' Set DPCL for risk-adjusted Bernoulli CUSUM Charts
 #' @export
 #' @import stats
 #' @import data.table
