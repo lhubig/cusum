@@ -19,7 +19,7 @@
 #'     alpha = 0.05)
 
 
-cusum_limit_sim_exact <- function(n_patients,
+cusum_limit_exact <- function(n_patients,
                                   failure_probability,
                                   odds_multiplier,
                                   alpha) {
