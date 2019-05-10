@@ -32,16 +32,20 @@ set.seed(2046)
 patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.05))
 
 
-cs_ic <- cusum(failure_probability = 0.05,
-    patient_outcomes,
-    limit = 2.96)
+cs_ic <- cusum(
+  failure_probability = 0.05,
+  patient_outcomes,
+  limit = 2.96
+)
 
 # CUSUM of out-of-control process
 # simulate patient outcome
 set.seed(2046)
 patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.2))
 
-cs_oc <- cusum(failure_probability = 0.05,
-    patient_outcomes,
-    limit = 2.96)
+cs_oc <- cusum(
+  failure_probability = 0.05,
+  patient_outcomes,
+  limit = 2.96
+)
 }

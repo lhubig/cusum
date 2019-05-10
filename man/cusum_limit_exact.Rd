@@ -19,14 +19,16 @@ cusum_limit_exact(n_patients, failure_probability, odds_multiplier, alpha)
 Returns the CL for small sample sizes
 }
 \description{
-This function only works for very small sample sizes (<= 15), 
+This function only works for very small sample sizes (<= 15),
 as it permutes through all possible outcome sequences and estimates the percentage of runs that reach a specific CUSUM values.
 }
 \examples{
 
 # calculate exact control limits for alpha = 0.05
-cusum_limit_exact(failure_probability = 0.1,
-    n_patients = 10,
-    odds_multiplier = 2,
-    alpha = 0.05)
+cusum_limit_exact(
+  failure_probability = 0.1,
+  n_patients = 10,
+  odds_multiplier = 2,
+  alpha = 0.05
+)
 }

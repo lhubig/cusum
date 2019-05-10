@@ -30,7 +30,7 @@ Simulate false signal probability alpha given control limit for RA-CUSUM charts
 # If not, these risk scores can be simulated.
 
 # define possible patient risk scores
-risks <- c(0.001,0.01,0.1,0.002,0.02,0.2)
+risks <- c(0.001, 0.01, 0.1, 0.002, 0.02, 0.2)
 
 # sample risk population of size n = 100
 set.seed(2046)
@@ -41,8 +41,9 @@ patient_risks <- sample(x = risks, size = 100, replace = TRUE)
 
 # simulate false positive probability of RA-CUSUM
 racusum_alpha_sim(patient_risks,
-    odds_multiplier = 2,
-    n_simulation = 1000,
-    limit = 2.96,
-    seed = 2046)
+  odds_multiplier = 2,
+  n_simulation = 1000,
+  limit = 2.96,
+  seed = 2046
+)
 }

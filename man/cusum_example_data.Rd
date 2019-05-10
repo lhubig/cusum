@@ -11,7 +11,7 @@
   \item{year}{Year of treatment}
 }}
 \source{
-Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany. 
+Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany.
 
 Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/17n1hftfrak/QSKH_17n1-HUEFTFRAK_2016_QIDB_V02_2017-04-26.pdf}
 }
