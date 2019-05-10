@@ -9,7 +9,7 @@ test_that("Output of Control limit simulation", {
     failure_probability = 0.05,
     patient_outcomes = outcomes,
     limit = 2.96,
-    odds_multiplier= 2,
+    odds_multiplier = 2,
     reset = TRUE
   )
   result <- round(works$ct, 2)

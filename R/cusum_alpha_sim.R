@@ -12,18 +12,19 @@
 #' @return Returns false signal probability alpha
 #' @examples
 #'
-#
+#' #
 #' # control limit can be obtained with cusum_limit_sim(),
 #' # here it is set to an arbitrary value (2.96)
 #'
 #' # simulate false positive probability of CUSUM
-#' cusum_alpha_sim(failure_probability = 0.05,
-#'     n_patients = 100,
-#'     odds_multiplier = 2,
-#'     n_simulation = 10000,
-#'     limit = 2.96,
-#'     seed = 2046)
-
+#' cusum_alpha_sim(
+#'   failure_probability = 0.05,
+#'   n_patients = 100,
+#'   odds_multiplier = 2,
+#'   n_simulation = 10000,
+#'   limit = 2.96,
+#'   seed = 2046
+#' )
 cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_simulation, limit, seed = NULL) {
 
   ## Check user input ####
@@ -64,7 +65,7 @@ cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_
     for (i in 2:npat) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
     return(max(c.t))
   }
-  
+
   suppressWarnings(RNGversion("3.5.0"))
 
   set.seed(seed)

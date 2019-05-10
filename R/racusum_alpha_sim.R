@@ -15,7 +15,7 @@
 #' # If not, these risk scores can be simulated.
 #'
 #' # define possible patient risk scores
-#' risks <- c(0.001,0.01,0.1,0.002,0.02,0.2)
+#' risks <- c(0.001, 0.01, 0.1, 0.002, 0.02, 0.2)
 #'
 #' # sample risk population of size n = 100
 #' set.seed(2046)
@@ -26,11 +26,11 @@
 #'
 #' # simulate false positive probability of RA-CUSUM
 #' racusum_alpha_sim(patient_risks,
-#'     odds_multiplier = 2,
-#'     n_simulation = 1000,
-#'     limit = 2.96,
-#'     seed = 2046)
-
+#'   odds_multiplier = 2,
+#'   n_simulation = 1000,
+#'   limit = 2.96,
+#'   seed = 2046
+#' )
 racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limit, seed = NULL) {
 
   ## Check user input ####
@@ -80,9 +80,9 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
     for (i in 2:n) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
     return(max(c.t))
   }
-  
+
   suppressWarnings(RNGversion("3.5.0"))
-  
+
   set.seed(seed)
   rl <- lapply(1:n_simulation, cs_sim)
 

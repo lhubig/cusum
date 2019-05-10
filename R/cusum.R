@@ -7,33 +7,36 @@
 #' @import graphics
 #' @param failure_probability Accepted failure probability of process
 #' @param patient_outcomes A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)
-#' @param limit Control limit to signal process deterioration. 
+#' @param limit Control limit to signal process deterioration.
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
 #' @param reset Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE
 #' @examples
 #'
 #' # control limit can be obtained with cusum_limit_sim(),
 #' # here it is set to an arbitrary value (2.96)
-#' 
+#'
 #' # CUSUM of in-control process
 #' # simulate patient outcomes
 #' set.seed(2046)
 #' patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.05))
 #'
 #'
-#' cs_ic <- cusum(failure_probability = 0.05,
-#'     patient_outcomes,
-#'     limit = 2.96)
+#' cs_ic <- cusum(
+#'   failure_probability = 0.05,
+#'   patient_outcomes,
+#'   limit = 2.96
+#' )
 #'
 #' # CUSUM of out-of-control process
 #' # simulate patient outcome
 #' set.seed(2046)
 #' patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.2))
 #'
-#' cs_oc <- cusum(failure_probability = 0.05,
-#'     patient_outcomes,
-#'     limit = 2.96)
-
+#' cs_oc <- cusum(
+#'   failure_probability = 0.05,
+#'   patient_outcomes,
+#'   limit = 2.96
+#' )
 cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE) {
 
   ## Check user input ####
@@ -56,7 +59,7 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   }
 
   assert_logical(reset, any.missing = FALSE, len = 1)
-  
+
   ## Calculate CUSUM Chart ####
   npat <- length(patient_outcomes)
 
@@ -96,6 +99,6 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   names(cs) <- c("t", "failure_probability", "ct", "signal", "limit")
 
   class(cs) <- c("cusum", "data.frame")
-  
+
   return(cs)
 }

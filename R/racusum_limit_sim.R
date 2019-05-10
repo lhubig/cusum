@@ -16,7 +16,7 @@
 #' # If not, these risk scores can be simulated.
 #'
 #' # define possible patient risk scores
-#' risks <- c(0.001,0.01,0.1,0.002,0.02,0.2)
+#' risks <- c(0.001, 0.01, 0.1, 0.002, 0.02, 0.2)
 #'
 #' # sample risk population of size n = 100
 #' set.seed(2046)
@@ -24,11 +24,11 @@
 #'
 #' # simulate control limits for alpha = 0.05
 #' racusum_limit_sim(patient_risks,
-#'    odds_multiplier = 2,
-#'    n_simulation = 1000,
-#'    alpha = 0.05,
-#'    seed = 2046)
-
+#'   odds_multiplier = 2,
+#'   n_simulation = 1000,
+#'   alpha = 0.05,
+#'   seed = 2046
+#' )
 racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alpha, seed = NULL) {
 
   ## Check user input ####
@@ -79,7 +79,7 @@ racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alph
     return(max(c.t))
   }
   suppressWarnings(RNGversion("3.5.0"))
-  
+
   set.seed(seed)
   rl <- lapply(1:n_simulation, cs_sim)
 

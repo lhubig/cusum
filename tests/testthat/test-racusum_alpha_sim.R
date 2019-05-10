@@ -10,7 +10,7 @@ test_that("Output of alpha simulation", {
   expected_results <- 0.025
   works <- round(
     racusum_alpha_sim(patient_risks,
-      odds_multiplier =  2,
+      odds_multiplier = 2,
       n_simulation = 1000,
       limit = 2.96,
       seed = 2046
