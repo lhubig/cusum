@@ -10,7 +10,7 @@
 #' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
 #' @param alpha False signal probability
 #' @param seed An optional seed for simulation
-#' @references Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts: DPCLs for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM. Quality and Reliability Engineering International. 10.1002/qre.2044.
+#' @references Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts. Quality and Reliability Engineering International. 10.1002/qre.2044.
 #' @return Returns the control limit
 #'
 racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, alpha, seed = NULL) {
