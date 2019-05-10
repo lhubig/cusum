@@ -17,7 +17,7 @@ racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, a
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
 
-  assert_numeric(n_simulation, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(N, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
 
   assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
   if (odds_multiplier < 1) {
