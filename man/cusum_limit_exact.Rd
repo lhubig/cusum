@@ -25,7 +25,7 @@ as it permutes through all possible outcome sequences and estimates the percenta
 \examples{
 
 # calculate exact control limits for alpha = 0.05
-cusum_limit_sim_exact(failure_probability = 0.1,
+cusum_limit_exact(failure_probability = 0.1,
     n_patients = 10,
     odds_multiplier = 2,
     alpha = 0.05)

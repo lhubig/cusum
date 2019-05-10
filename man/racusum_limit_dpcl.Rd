@@ -4,7 +4,8 @@
 \alias{racusum_limit_dpcl}
 \title{Setting the Dynamic Probability Control Limits}
 \usage{
-racusum_limit_dpcl(patient_risks, N, odds_multiplier, alpha, seed)
+racusum_limit_dpcl(patient_risks, N = 1e+05, odds_multiplier = 2,
+  alpha, seed = NULL)
 }
 \arguments{
 \item{patient_risks}{A vector containing patient risk scores}
@@ -21,5 +22,8 @@ racusum_limit_dpcl(patient_risks, N, odds_multiplier, alpha, seed)
 Returns the control limit
 }
 \description{
+Setting the Dynamic Probability Control Limits
+}
+\references{
 Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts: DPCLs for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM. Quality and Reliability Engineering International. 10.1002/qre.2044.
 }
