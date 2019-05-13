@@ -16,6 +16,12 @@ You can install the released version of cusum from
 install.packages("cusum")
 ```
 
+Or the pre-release version from github with:
+
+``` r
+devtools::install_github("lhubig/cusum")
+```
+
 ## Example
 
 This is a basic example which shows you how to construct CUSUM charts
@@ -31,7 +37,7 @@ limit <- cusum_limit_sim(failure_probability = 0.05,
                           alpha = 0.05,
                           seed = 2018)
 print(limit)
-#> [1] 2.712558
+#> [1] 2.696187
 set.seed(2018)
 patient_outcomes <- as.logical(rbinom(n = 100, size = 1, prob = 0.05))
 
