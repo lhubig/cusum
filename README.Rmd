@@ -20,8 +20,13 @@ The goal of cusum is to provide functions for constructing and evaluating CUSUM 
 
 You can install the released version of cusum from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+``` {r}
 install.packages("cusum")
+```
+
+Or the pre-release version from github with:
+``` {r}
+devtools::install_github("lhubig/cusum")
 ```
 
 ## Example
