@@ -51,25 +51,25 @@
 #' )
 racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2, reset = TRUE, limit_method = c("constant", "dynamic")) {
   npat <- length(patient_risks)
-  
+
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
-  if (length(patient_risks) != length(patient_outcomes)){
+  if (length(patient_risks) != length(patient_outcomes)) {
     stop("Length patient_risks and patient_outcomes of unequal size.")
   }
 
   assert_logical(patient_outcomes, any.missing = FALSE)
 
   limit_method <- match.arg(limit_method)
-  if (length(limit) == 1 & npat > 1 & limit_method == "dynamic"){
+  if (length(limit) == 1 & npat > 1 & limit_method == "dynamic") {
     stop("Provide vector of limit if limit_method = dynamic. Else change to constant")
   }
-  
-  if (limit_method == "constant"){
+
+  if (limit_method == "constant") {
     limit <- rep(limit, length.out = npat)
   }
-  
- # assert_numeric(limit, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+
+  # assert_numeric(limit, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
 
   assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
   if (odds_multiplier < 1) {
@@ -78,7 +78,7 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   if (odds_multiplier == 1) {
     warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
   }
-  
+
 
   assert_logical(reset, any.missing = FALSE, len = 1)
 
@@ -122,4 +122,3 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
 
   return(cs)
 }
-
