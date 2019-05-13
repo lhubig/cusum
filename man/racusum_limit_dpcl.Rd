@@ -2,7 +2,7 @@
 % Please edit documentation in R/racusum_limit_dpcl.R
 \name{racusum_limit_dpcl}
 \alias{racusum_limit_dpcl}
-\title{Setting the Dynamic Probability Control Limits}
+\title{Dynamic Probability Control Limits (DPCL)}
 \usage{
 racusum_limit_dpcl(patient_risks, N = 1e+05, odds_multiplier = 2,
   alpha, seed = NULL)
@@ -22,7 +22,7 @@ racusum_limit_dpcl(patient_risks, N = 1e+05, odds_multiplier = 2,
 Returns the control limit
 }
 \description{
-Setting the Dynamic Probability Control Limits
+Set DPCL for risk-adjusted Bernoulli CUSUM Charts
 }
 \references{
 Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts. Quality and Reliability Engineering International. 10.1002/qre.2044.
