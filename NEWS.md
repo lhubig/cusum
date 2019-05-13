@@ -1,6 +1,9 @@
 # cusum 0.3.0 (2019/05/08) ---- on github
+
+### New features
 * new function to calculate CUSUM control limits exactly for very small sample sizes
 * function to calculate DPCL following Zhang and Woodall (2016) for RA-CUSUM
+
 # cusum 0.2.1 (2019/03/19)
 
 ### Bug fixes
