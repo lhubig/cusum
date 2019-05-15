@@ -27,13 +27,15 @@ Set DPCL for risk-adjusted Bernoulli CUSUM Charts
 \examples{
 patient_risks <- runif(100, min = 0.1, max = 0.8)
 
-racusum_limit_dpcl(patient_risks = patient_risks,
-N = 1000,
-odds_multiplier = 2,
-alpha = 0.05,
-seed = 32423)
+dpcl <- racusum_limit_dpcl(
+  patient_risks = patient_risks,
+  N = 1000,
+  odds_multiplier = 2,
+  alpha = 0.05,
+  seed = 32423
+)
 
-
+plot(dpcl, type = "l")
 }
 \references{
 Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts. Quality and Reliability Engineering International. 10.1002/qre.2044.

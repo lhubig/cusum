@@ -16,13 +16,15 @@
 #' @examples
 #' patient_risks <- runif(100, min = 0.1, max = 0.8)
 #'
-#' racusum_limit_dpcl(
+#' dpcl <- racusum_limit_dpcl(
 #'   patient_risks = patient_risks,
 #'   N = 1000,
 #'   odds_multiplier = 2,
 #'   alpha = 0.05,
 #'   seed = 32423
 #' )
+#' 
+#' plot(dpcl, type = "l")
 racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, alpha, seed = NULL) {
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
