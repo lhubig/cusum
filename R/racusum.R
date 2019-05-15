@@ -22,8 +22,9 @@
 #' set.seed(2046)
 #' patient_risks <- sample(x = risks, size = 100, replace = TRUE)
 #'
-#' # control limit can be obtained with racusum_CL_sim(),
-#' # here it is set to an arbitrary value (2.96)
+#' # control limit can be obtained with racusum_limit_sim(),
+#' # here it is set to an arbitrary value (2.96),
+#' # or dynamic control limits with racusum_limit_dpcl()
 #'
 #' ##### RA-CUSUM of in-control process
 #' # simulate patient outcome for performace as expected
