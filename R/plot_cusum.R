@@ -30,13 +30,18 @@ plot.cusum <- function(x, signal = TRUE, ...) {
       lwd = 5
     )
   }
-
+  
   lines(
     x = x$t,
     y = x$ct
   )
 
-  abline(h = unique(x$limit), col = "Blue")
+  lines(
+    x = x$t,
+    y = x$limit,
+    col = "Blue"
+  )
+  
   points(
     x = x$t,
     y = x$ct,
