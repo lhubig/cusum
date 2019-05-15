@@ -13,6 +13,16 @@
 #' @references Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts. Quality and Reliability Engineering International. 10.1002/qre.2044.
 #' @return Returns the control limit
 #'
+#' @examples
+#' patient_risks <- runif(100, min = 0.1, max = 0.8)
+#'
+#' racusum_limit_dpcl(
+#'   patient_risks = patient_risks,
+#'   N = 1000,
+#'   odds_multiplier = 2,
+#'   alpha = 0.05,
+#'   seed = 32423
+#' )
 racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, alpha, seed = NULL) {
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
@@ -29,53 +39,33 @@ racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, a
 
   assert_numeric(alpha, lower = 0, upper = 1, len = 1, finite = TRUE, any.missing = FALSE)
 
-  assert_numeric(as.numeric(seed), lower = 0, len = 1)
+  # assert_numeric(as.numeric(seed), lower = 0, len = 1)
 
 
-  delta_o <- 1
-  n_patients <- length(patient_risks)
+  cs <- 0
 
-  hs <- matrix(0, nrow = n_patients, ncol = 2)
+  M <- (N * (1 - alpha))
 
-  cs <- 0 # initial cusum value
+  h <- vector(length = length(patient_risks))
 
   set.seed(seed)
+  for (i in 1:length(patient_risks)) {
+    pi <- patient_risks[i]
+    yi <- rbinom(N, 1, pi)
+    ws <- log((1 - pi + 1 * pi) / (1 - pi + odds_multiplier * pi)) # survival
+    wf <- log(((1 - pi + 1 * pi) * odds_multiplier) / ((1 - pi + odds_multiplier * pi) * 1)) # failure
+    w <- ifelse(yi == 1, wf, ws)
 
-  # loop over patients
-  for (j in 1:n_patients) {
-    p1 <- patient_risks[j] # in control failure rate p
-    y1 <- rbinom(N, 1, p1) # generate N Bernoulli random variables with ic-failure p1
-
-    # define weights
-    ws <- log((1 - p1 + delta_o * p1) / (1 - p1 + odds_multiplier * p1)) # survival
-    wf <- log(((1 - p1 + delta_o * p1) * odds_multiplier) / ((1 - p1 + odds_multiplier * p1) * delta_o)) # failure
-
-    css <- matrix(0, nrow = N, ncol = 2)
-
-    # generate N CUSUM statistics
-    for (i in 1:N) {
-      if (j != 1) {
-        cs <- sample(c, 1)
-      } else {
-        cs <- 0
-      }
-      w <- ifelse(y1[i] == 0, ws, wf)
-
-      ct <- max(0, cs + w)
-      css[i, ] <- c(i, ct)
+    cs_i <- NULL
+    for (j in 1:N) {
+      ct_i <- sample(cs, 1)
+      cs_i[j] <- max(0, ct_i + w[j])
     }
-
-    css <- data.table(css, key = "V2") # sort CUSUM statistics in ascending order
-
-    # take upper percentile as h
-    m <- floor(N * (1 - alpha))
-
-    h <- css$V2[m]
-    hs[j, ] <- c(j, h)
-
-    # remove all cusum statistics with higher value
-    c <- css$V2[css$V2 <= h]
+    cs <- sort(cs_i)
+    h[i] <- cs[M]
+    cs <- cs[cs <= h[i]]
   }
 
-  return(hs)
+
+  return(h)
 }
