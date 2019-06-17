@@ -10,12 +10,18 @@
 
 
 plot.cusum <- function(x, signal = TRUE, ...) {
+  if (mean(x$ct) < 0){
+    y_lim <- c(min(x$ct), 0)
+  } else {
+    y_lim <- c(0, max(x$ct))
+  }
+
   plot(
     x = x$t,
     y = x$ct,
     type = "n",
     xlim = c(0, max(x$t)),
-    ylim = c(0, max(x$ct)),
+    ylim = y_lim,
     ylab = expression(CUSUM[t]), xlab = "t",
     ...
   )

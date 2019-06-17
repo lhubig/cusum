@@ -75,6 +75,10 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
   if (odds_multiplier < 1) {
     message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
+    
+    if (limit > 0){
+      warning("Control limit should be negative to signal process improvements.")
+    }
   }
   if (odds_multiplier == 1) {
     warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
@@ -98,7 +102,11 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   w <- ifelse(patient_outcomes == 1, wf, ws) # weights based on outcome
 
   for (ii in 1:npat) {
-    ct <- max(0, ct + w[ii]) # update CUSUM value
+    if (odds_multiplier > 1) {
+      ct <- max(0, ct + w[ii])
+    } else if (odds_multiplier < 1) {
+      ct <- min(0, ct - w[ii])
+    }    
     cs[ii, 1] <- ii # store patient id
     cs[ii, 2] <- p[ii] # store patient risk
     cs[ii, 3] <- ct # store CUSUM value

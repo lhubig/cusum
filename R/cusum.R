@@ -48,14 +48,19 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
 
   assert_logical(patient_outcomes, any.missing = FALSE)
 
-  assert_numeric(limit, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(limit, len = 1, finite = TRUE, any.missing = FALSE)
 
   assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
   if (odds_multiplier < 1) {
     message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
+    
+    if (limit > 0){
+      warning("Control limit should be negative to signal process improvements.")
+    }
   }
   if (odds_multiplier == 1) {
     warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
+    stop()
   }
 
   assert_logical(reset, any.missing = FALSE, len = 1)
@@ -78,7 +83,11 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
   w <- ifelse(patient_outcomes == 1, wf, ws) # weights based on outcome
 
   for (ii in 1:npat) {
-    ct <- max(0, ct + w[ii]) # update CUSUM value
+    if (odds_multiplier > 1) {
+      ct <- max(0, ct + w[ii])
+    } else if (odds_multiplier < 1) {
+      ct <- min(0, ct - w[ii])
+    }
     cs[ii, 1] <- ii # store patient id
     cs[ii, 2] <- failure_probability
     cs[ii, 3] <- ct # store CUSUM value

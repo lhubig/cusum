@@ -3,6 +3,7 @@
 ### New features
 * new function to calculate CUSUM control limits exactly for very small sample sizes
 * function to calculate DPCL following Zhang and Woodall (2016) for RA-CUSUM
+* detect process imrovements with cusum() and racusum()
 
 # cusum 0.2.1 (2019/03/19)
 
