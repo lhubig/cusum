@@ -24,5 +24,3 @@ Suggests:
     rmarkdown
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
-LinkingTo: 
-    Rcpp
