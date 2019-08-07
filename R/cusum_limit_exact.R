@@ -63,7 +63,13 @@ cusum_limit_exact <- function(n_patients,
     return(prod(ifelse(kk == 1, pp, 1 - pp)))
   }, pp = failure_probability)
 
-
+  which_rfc <- function(xx, mm) {
+    res <- apply(mm, 2, function(yy, cc) {
+      return(sum(yy >= cc) > 0)
+    }, cc = xx)
+    
+    return(res)
+  }
   cs <- apply(outcome, 1, calc_cusum, c0 = failure_probability, cA = p.1)
   limit <- unique(as.vector(cs))
   which.res <- lapply(limit, which_rfc, mm = cs)
@@ -77,7 +83,12 @@ cusum_limit_exact <- function(n_patients,
   return(res[which.min(abs(alpha - res[, 2])), 1])
 }
 
-
+#' Make all outcomes
+#'
+#' creates all possible sequences of outcomes for a sample size
+#'
+#' @param npat_outcome Number of patients (sample sizes)
+#' @return Returns matrix of possible sequences
 make_all_outcomes <- function(npat_outcome) {
 
   #
@@ -93,14 +104,15 @@ make_all_outcomes <- function(npat_outcome) {
   return(m)
 }
 
+#' Calculate CUSUM
+#'
+#' This function calculates the CUSUM chart for the given sequence of successes and failures
+#'
+#' @param x vector of outcomes
+#' @param c0 accepted failure probability
+#' @param cA smallest detectable failure probability
+#' @return Returns matrix of possible sequences
 calc_cusum <- function(x, c0, cA) {
-
-  #
-  # 	This function calculates the CUSUM chart
-  # 	for the given sequence of successes and failures
-  # 	provided by the vector x: x=0 no failure, x=1 failure
-  #
-
   wt <- ifelse(x == 0, log((1 - cA) / (1 - c0)), log(cA / c0))
 
   j <- length(wt)
@@ -113,10 +125,4 @@ calc_cusum <- function(x, c0, cA) {
   return(ct)
 }
 
-which_rfc <- function(xx, mm) {
-  res <- apply(mm, 2, function(yy, cc) {
-    return(sum(yy >= cc) > 0)
-  }, cc = xx)
 
-  return(res)
-}
