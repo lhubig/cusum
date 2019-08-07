@@ -1,3 +1,8 @@
+# cusum 0.3.1 (2019/08/07)
+
+### New features
+* new function to calculate grouped CUSUM (gCUSUM) for risk-adjusted and non-risk-adjusted processes
+
 # cusum 0.3.0 (2019/06/17)
 
 ### New features
