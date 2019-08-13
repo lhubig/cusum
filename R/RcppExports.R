@@ -13,6 +13,10 @@
 #' @param seed Integer. Seed for RNG
 #' @param quantiles Double. Vector of requested quantiles of GCUSUM distribution
 #' @return gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
+#' @example 
+#' input_outcomes <- matrix(c(gcusum_example_data$y, gcusum_example_data$block_identifier), ncol = 2)
+#' gs <- gcusum(input_outcomes = input_outcomes, failure_probability = 0.2, odds_multiplier = 2, limit = 2, max_num_shuffles = 1000,  seed = 2098,  quantiles = c(0,0.25,0.5,0.75,1))
+#' 
 #' @export
 gcusum <- function(input_outcomes, failure_probability, odds_multiplier, limit, max_num_shuffles, seed, quantiles) {
     .Call(`_cusum_gcusum`, input_outcomes, failure_probability, odds_multiplier, limit, max_num_shuffles, seed, quantiles)
@@ -23,13 +27,18 @@ gcusum <- function(input_outcomes, failure_probability, odds_multiplier, limit, 
 #' 
 #' @description Calculate GCUSUM chart for risk-adjusted processes.
 #' 
-#' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.
+#' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.
 #' @param limit Double. Control limit for signalling performance change
 #' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
 #' @param seed Integer. Seed for RNG
 #' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
 #' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
-#'  
+#' @examples
+#' weight_s <- log((1) / (1 + ragcusum_example_data$score))
+#' weight_f <- log((2) / (1 + ragcusum_example_data$score))
+#' x <- ragcusum_example_data
+#' ra_outcomes <- matrix(c(x$y, weight_f, weight_s, x$block_identifier))
+#'   gs <- ragcusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
 #' @export
 ragcusum <- function(input_ra_outcomes, limit, max_num_shuffles, seed, quantiles) {
     .Call(`_cusum_ragcusum`, input_ra_outcomes, limit, max_num_shuffles, seed, quantiles)
