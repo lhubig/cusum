@@ -5,13 +5,13 @@
 #' @export
 #' @import stats
 #' @import data.table
-#' @param patient_risks A vector containing patient risk scores
-#' @param N Number of simulations
-#' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
-#' @param alpha False signal probability
-#' @param seed An optional seed for simulation
+#' @param patient_risks Double. Vector of patient risk scores (individual risk of adverse event)
+#' @param N Integer. Number of simulation runs
+#' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+#' @param alpha Double. False signal probability of RA-CUSUM
+#' @param seed Integer. Seed for RNG
 #' @references Zhang, Xiang & Woodall, William. (2016). Dynamic Probability Control Limits for Lower and Two-Sided Risk-Adjusted Bernoulli CUSUM Charts. Quality and Reliability Engineering International. 10.1002/qre.2044.
-#' @return Returns the control limit
+#' @return Returns vector of dynamic control limit for signalling performance change (double)
 #'
 #' @examples
 #' patient_risks <- runif(100, min = 0.1, max = 0.8)
@@ -27,11 +27,11 @@
 #' plot(dpcl, type = "l")
 racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, alpha, seed = NULL) {
   ## Check user input ####
-  assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(patient_risks, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
 
-  assert_numeric(N, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
-
-  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_integer(as.integer(N), lower = 1, any.missing = FALSE, len = 1)
+  
+  assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
   }
@@ -39,11 +39,10 @@ racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, a
     warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
   }
 
-  assert_numeric(alpha, lower = 0, upper = 1, len = 1, finite = TRUE, any.missing = FALSE)
-
-  # assert_numeric(as.numeric(seed), lower = 0, len = 1)
-
-
+  assert_numeric(alpha, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
+  
+  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, len = 1)
+  
   cs <- 0
 
   M <- (N * (1 - alpha))

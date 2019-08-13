@@ -4,12 +4,15 @@
 #' @export
 #' @import utils
 #' @param x An object of class cusum
-#' @param signal If TRUE, signals are plotted (default)
+#' @param signal Logical. If TRUE, signals are plotted (default)
 #' @method plot cusum
 #' @usage ## S3 method for class 'cusum' plot(x, signal = TRUE, ...)
 
 
 plot.cusum <- function(x, signal = TRUE, ...) {
+  
+  assert_logical(signal, len = 1)
+
   if (mean(x$ct) < 0){
     y_lim <- c(min(x$ct), 0)
   } else {

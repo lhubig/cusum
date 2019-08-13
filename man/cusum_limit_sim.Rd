@@ -8,20 +8,20 @@ cusum_limit_sim(failure_probability, n_patients, odds_multiplier,
   n_simulation, alpha, seed = NULL)
 }
 \arguments{
-\item{failure_probability}{Accepted failure probability of process}
+\item{failure_probability}{Double. Baseline failure probability}
 
-\item{n_patients}{Sample size}
+\item{n_patients}{Integer. Number of patients in monitoring period /sample size}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{n_simulation}{Number of simulations}
+\item{n_simulation}{Integer. Number of simulation runs}
 
-\item{alpha}{False signal probability}
+\item{alpha}{Double. False signal probability of CUSUM}
 
-\item{seed}{An optional seed for simulation}
+\item{seed}{Integer. Seed for RNG}
 }
 \value{
-Returns the CL
+Returns the control limit for signalling performance change (double)
 }
 \description{
 Simulate control limit given false signal probability alpha for CUSUM charts

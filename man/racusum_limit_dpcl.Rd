@@ -8,18 +8,18 @@ racusum_limit_dpcl(patient_risks, N = 1e+05, odds_multiplier = 2,
   alpha, seed = NULL)
 }
 \arguments{
-\item{patient_risks}{A vector containing patient risk scores}
+\item{patient_risks}{Double. Vector of patient risk scores (individual risk of adverse event)}
 
-\item{N}{Number of simulations}
+\item{N}{Integer. Number of simulation runs}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{alpha}{False signal probability}
+\item{alpha}{Double. False signal probability of RA-CUSUM}
 
-\item{seed}{An optional seed for simulation}
+\item{seed}{Integer. Seed for RNG}
 }
 \value{
-Returns the control limit
+Returns vector of dynamic control limit for signalling performance change (double)
 }
 \description{
 Set DPCL for risk-adjusted Bernoulli CUSUM Charts

@@ -5,17 +5,17 @@
 #' @title Grouped-CUSUM chart
 #' @description Calculate GCUSUM chart for non-risk-adjusted processes.
 #' 
-#' @param input_outcomes NumericMatrix, patient outcomes and block_id (continuous).
-#' @param failure_prob double, accepted failure probability of null hypothesis.
-#' @param delta double, odds multiplier.
-#' @param control_limit double, control limit.
-#' @param max_num_shuffles integer, number of shuffles.
-#' @param seed integer.
-#' @param quantiles NumericVector, quantiles that are returned.
-#' @return gcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
+#' @param input_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifer.
+#' @param failure_probability Double. Baseline failure probability
+#' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+#' @param limit Double. Control limit for signalling performance change
+#' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
+#' @param seed Integer. Seed for RNG
+#' @param quantiles Double. Vector of requested quantiles of GCUSUM distribution
+#' @return gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
 #' @export
-gcusum <- function(input_outcomes, failure_prob, delta, control_limit, max_num_shuffles, seed, quantiles) {
-    .Call(`_cusum_gcusum`, input_outcomes, failure_prob, delta, control_limit, max_num_shuffles, seed, quantiles)
+gcusum <- function(input_outcomes, failure_probability, odds_multiplier, limit, max_num_shuffles, seed, quantiles) {
+    .Call(`_cusum_gcusum`, input_outcomes, failure_probability, odds_multiplier, limit, max_num_shuffles, seed, quantiles)
 }
 
 #' @name ragcusum
@@ -23,15 +23,15 @@ gcusum <- function(input_outcomes, failure_prob, delta, control_limit, max_num_s
 #' 
 #' @description Calculate GCUSUM chart for risk-adjusted processes.
 #' 
-#' @param input_ra_outcomes NumericMatrix, patient outcomes and block_id (continuous).
-#' @param control_limit double, control limit.
-#' @param max_num_shuffles integer, number of shuffles.
-#' @param seed integer.
-#' @param quantiles NumericVector, quantiles that are returned.
+#' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.
+#' @param limit Double. Control limit for signalling performance change
+#' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
+#' @param seed Integer. Seed for RNG
+#' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
 #' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
 #'  
 #' @export
-ragcusum <- function(input_ra_outcomes, control_limit, max_num_shuffles, seed, quantiles) {
-    .Call(`_cusum_ragcusum`, input_ra_outcomes, control_limit, max_num_shuffles, seed, quantiles)
+ragcusum <- function(input_ra_outcomes, limit, max_num_shuffles, seed, quantiles) {
+    .Call(`_cusum_ragcusum`, input_ra_outcomes, limit, max_num_shuffles, seed, quantiles)
 }
 

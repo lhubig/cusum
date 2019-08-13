@@ -8,18 +8,18 @@ racusum_limit_sim(patient_risks, odds_multiplier, n_simulation, alpha,
   seed = NULL)
 }
 \arguments{
-\item{patient_risks}{A vector containing patient risk scores}
+\item{patient_risks}{Double. Vector of patient risk scores (individual risk of adverse event)}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{n_simulation}{Number of simulations}
+\item{n_simulation}{Integer. Number of simulation runs}
 
-\item{alpha}{False signal probability}
+\item{alpha}{Double. False signal probability of RA-CUSUM}
 
-\item{seed}{An optional seed for simulation}
+\item{seed}{Integer. Seed for RNG}
 }
 \value{
-Returns the control limit
+Returns the control limit for signalling performance change (double)
 }
 \description{
 False-signal-probability-simulation of Control Limits h for risk-adjusted CUSUM charts

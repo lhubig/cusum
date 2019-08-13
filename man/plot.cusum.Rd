@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object of class cusum}
 
-\item{signal}{If TRUE, signals are plotted (default)}
+\item{signal}{Logical. If TRUE, signals are plotted (default)}
 }
 \description{
 Produces a CUSUM chart.

@@ -10,15 +10,15 @@ cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
   reset = TRUE)
 }
 \arguments{
-\item{failure_probability}{Accepted failure probability of process}
+\item{failure_probability}{Double. Baseline failure probability}
 
-\item{patient_outcomes}{A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)}
+\item{patient_outcomes}{Integer. Vector of binary patient outcomes (0,1)}
 
-\item{limit}{Control limit to signal process deterioration.}
+\item{limit}{Double. Control limit for signalling performance change}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{reset}{Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE}
+\item{reset}{Logical. Reset the CUSUM after a signal to 0; defaults to TRUE}
 }
 \description{
 Calculate non-risk-adjusted CUSUM charts for performance data

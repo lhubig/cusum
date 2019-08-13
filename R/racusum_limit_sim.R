@@ -4,12 +4,12 @@
 #' @export
 #' @import checkmate
 #' @import stats
-#' @param patient_risks A vector containing patient risk scores
-#' @param n_simulation Number of simulations
-#' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
-#' @param alpha False signal probability
-#' @param seed An optional seed for simulation
-#' @return Returns the control limit
+#' @param patient_risks Double. Vector of patient risk scores (individual risk of adverse event)
+#' @param n_simulation Integer. Number of simulation runs
+#' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+#' @param alpha Double. False signal probability of RA-CUSUM
+#' @param seed Integer. Seed for RNG
+#' @return Returns the control limit for signalling performance change (double)
 #' @examples
 #'
 #' # Patients risks are usually known from Phase I.
@@ -32,9 +32,9 @@
 racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alpha, seed = NULL) {
 
   ## Check user input ####
-  assert_numeric(patient_risks, lower = 0, upper = 1, min.len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(patient_risks, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
 
-  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
@@ -42,12 +42,12 @@ racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alph
     warning("CUSUM detects no process change (odds_multiplier = 1).")
   }
 
-  assert_numeric(n_simulation, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_integer(as.integer(n_simulation), lower = 1, any.missing = FALSE, len = 1)
+  
+  assert_numeric(alpha, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
 
-  assert_numeric(alpha, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
-
-  assert_numeric(as.numeric(seed), lower = 0, max.len = 1)
-
+  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, len = 1)
+  
   ## Calculate risk distribution ####
   n <- length(patient_risks)
 

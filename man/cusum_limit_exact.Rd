@@ -7,16 +7,16 @@
 cusum_limit_exact(n_patients, failure_probability, odds_multiplier, alpha)
 }
 \arguments{
-\item{n_patients}{Sample size}
+\item{n_patients}{Integer. Number of patients in monitoring period /sample size}
 
-\item{failure_probability}{Accepted failure probability of process}
+\item{failure_probability}{Double. Baseline failure probability}
 
-\item{odds_multiplier}{Odds multiplier for the alternative hypothesis (<1 looks for decreases)}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{alpha}{False signal probability}
+\item{alpha}{Double. False signal probability of CUSUM}
 }
 \value{
-Returns the CL for small sample sizes
+Returns the control limit for signalling performance change for small sample sizes (double)
 }
 \description{
 This function only works for very small sample sizes (<= 15),

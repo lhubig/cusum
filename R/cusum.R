@@ -5,11 +5,11 @@
 #' @import checkmate
 #' @import stats
 #' @import graphics
-#' @param failure_probability Accepted failure probability of process
-#' @param patient_outcomes A vector containing patient outcomes in logical format (TRUE = event, FALSE = no event)
-#' @param limit Control limit to signal process deterioration.
-#' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases); defaults to 2
-#' @param reset Resets the CUSUM after a signal to 0 if TRUE; defaults to TRUE
+#' @param failure_probability Double. Baseline failure probability
+#' @param patient_outcomes Integer. Vector of binary patient outcomes (0,1) 
+#' @param limit Double. Control limit for signalling performance change
+#' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+#' @param reset Logical. Reset the CUSUM after a signal to 0; defaults to TRUE
 #' @examples
 #'
 #' # control limit can be obtained with cusum_limit_sim(),
@@ -45,12 +45,13 @@ cusum <- function(failure_probability, patient_outcomes, limit, odds_multiplier 
     failure_probability <- 1 - failure_probability
     warning("Accepted failure probability failure_probability will be recoded to 1-failure_probability when > 0.5.")
   }
+  
+  patient_outcomes <- as.integer(patient_outcomes)
+  assert_integer(patient_outcomes, lower = 0, upper = 1, any.missing = FALSE, min.len = 1)
 
-  assert_logical(patient_outcomes, any.missing = FALSE)
-
-  assert_numeric(limit, len = 1, finite = TRUE, any.missing = FALSE)
-
-  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(limit, finite = TRUE, any.missing = FALSE, len = 1)
+  
+  assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
     

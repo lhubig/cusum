@@ -4,26 +4,26 @@
 \alias{gcusum}
 \title{Grouped-CUSUM chart}
 \usage{
-gcusum(input_outcomes, failure_prob, delta, control_limit,
+gcusum(input_outcomes, failure_probability, odds_multiplier, limit,
   max_num_shuffles, seed, quantiles)
 }
 \arguments{
-\item{input_outcomes}{NumericMatrix, patient outcomes and block_id (continuous).}
+\item{input_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifer.}
 
-\item{failure_prob}{double, accepted failure probability of null hypothesis.}
+\item{failure_probability}{Double. Baseline failure probability}
 
-\item{delta}{double, odds multiplier.}
+\item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 
-\item{control_limit}{double, control limit.}
+\item{limit}{Double. Control limit for signalling performance change}
 
-\item{max_num_shuffles}{integer, number of shuffles.}
+\item{max_num_shuffles}{Integer. Number of shuffles (i.e. different sequences of observations)}
 
-\item{seed}{integer.}
+\item{seed}{Integer. Seed for RNG}
 
-\item{quantiles}{NumericVector, quantiles that are returned.}
+\item{quantiles}{Double. Vector of requested quantiles of GCUSUM distribution}
 }
 \value{
-gcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
+gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
 }
 \description{
 Calculate GCUSUM chart for non-risk-adjusted processes.

@@ -11,44 +11,50 @@ using namespace Rcpp;
 //' @title Grouped-CUSUM chart
 //' @description Calculate GCUSUM chart for non-risk-adjusted processes.
 //' 
-//' @param input_outcomes NumericMatrix, patient outcomes and block_id (continuous).
-//' @param failure_prob double, accepted failure probability of null hypothesis.
-//' @param delta double, odds multiplier.
-//' @param control_limit double, control limit.
-//' @param max_num_shuffles integer, number of shuffles.
-//' @param seed integer.
-//' @param quantiles NumericVector, quantiles that are returned.
-//' @return gcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
+//' @param input_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifer.
+//' @param failure_probability Double. Baseline failure probability
+//' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+//' @param limit Double. Control limit for signalling performance change
+//' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
+//' @param seed Integer. Seed for RNG
+//' @param quantiles Double. Vector of requested quantiles of GCUSUM distribution
+//' @return gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
+//' 
+//' @examples
+//' input_outcomes <- matrix(c(gcusum_example_data$y, gcusum_example_data$block_identifier), ncol = 2)
+//' 
+//' gs <- gcusum(input_outcomes = input_outcomes,
+//'     failure_probability = 0.2,
+//'     odds_multiplier = 2,
+//'     limit = 2,
+//'     max_num_shuffles = 1000,
+//'     seed = 2098,
+//'     quantiles = c(0,0.05,0.25,0.5,0.75,0.95,1))
+//'     
 //' @export
 // [[Rcpp::export(gcusum)]]
 NumericMatrix gcusum(NumericMatrix& input_outcomes,
-                     double failure_prob, 
-                     double delta,
-                     double control_limit, 
-                     int max_num_shuffles,
+                     double failure_probability, 
+                     double limit, 
                      int seed,
-                     NumericVector& quantiles) {
-  /*
-   * Calculate GCUSUM for non-risk-adjusted processes
-   *  
-   * input_outcomes: first column outcomes, second column block id (continuous)
-   * failure_prob: baseline failure probability
-   * delta: detection level, odds multiplier for alternative hyptohesis
-   * control_limit: control limit (estimated by cusum::cusum_limit_sim)
-   * max_num_shuffles: number of shuffles for observation groups
-   * seed: for RNG
-   */
+                     NumericVector& quantiles,
+                     double odds_multiplier = 2,
+                     int max_num_shuffles = 10000) {
+
+  assert(input_outcomes.size() > 0);
+  assert(input_outcomes(0,1) == 1);
+  assert(failure_probability >= 0 & failure_probability <= 1);
+  assert(odds_multiplier > 0);
   
   // calculate alternative probability of failure
-  double odds_A = delta * failure_prob/(1-failure_prob);;
+  double odds_A = odds_multiplier * failure_probability/(1-failure_probability);;
   double prob_A = odds_A/(1+odds_A);
   
   //calculate CUSUM weights
-  double weight_f =  std::round(65536. * std::log(prob_A/failure_prob)) / 65536;
-  double weight_s = std::round(65536. * std::log((1-prob_A)/(1-failure_prob))) / 65536;
+  double weight_f =  std::round(65536. * std::log(prob_A/failure_probability)) / 65536;
+  double weight_s = std::round(65536. * std::log((1-prob_A)/(1-failure_probability))) / 65536;
   
-  assert(input_outcomes.size() > 0);
-  assert(input_outcomes(0,1) == 1);
+ 
   
   std::mt19937_64 generator(seed);
   
@@ -113,7 +119,7 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
         double cs = start_value.first;
         for(std::size_t i = block.first; i != block.second; ++i) {
           cs = std::max(0., cs + (outcomes[i] ? weight_f : weight_s));
-          if (cs >= control_limit) {
+          if (cs >= limit) {
             returns(i,0) += scaled_increase;
           }
           returns(i,1) += cs * scaled_increase;
@@ -152,20 +158,20 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
 //' 
 //' @description Calculate GCUSUM chart for risk-adjusted processes.
 //' 
-//' @param input_ra_outcomes NumericMatrix, patient outcomes and block_id (continuous).
-//' @param control_limit double, control limit.
-//' @param max_num_shuffles integer, number of shuffles.
-//' @param seed integer.
-//' @param quantiles NumericVector, quantiles that are returned.
+//' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.
+//' @param limit Double. Control limit for signalling performance change
+//' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
+//' @param seed Integer. Seed for RNG
+//' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
 //' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
 //'  
 //' @export
 // [[Rcpp::export(ragcusum)]]
 NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
-                       double control_limit, 
-                       int max_num_shuffles,
+                       double limit,
                        int seed,
-                       NumericVector& quantiles) {
+                       NumericVector& quantiles, 
+                       int max_num_shuffles = 10000) {
   /*
    * Calculate GCUSUM for risk-adjusted processes. 
    * 
@@ -174,7 +180,7 @@ NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
    *     1: weight for failure
    *     2: weight for success
    *     3: block id
-   * control_limit: simulate by cusum::racusum_limit_sim() or better
+   * limit: simulate by cusum::racusum_limit_sim() or better
    * max_num_shuffle: maximum number of shuffles of one data block (can be smaller for n_b <= 5)
    * seed: for generator
    */
@@ -240,7 +246,7 @@ NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
         double cs = start_value.first;
         for(std::size_t i = block.first; i != block.second; ++i) {
           cs = std::max(0., cs + ( std::get<0>(ra_outcomes[i]) ? std::get<1>(ra_outcomes[i]) : std::get<2>(ra_outcomes[i])));
-          if (cs >= control_limit) {
+          if (cs >= limit) {
             returns(i,0) += scaled_increase;
           }
           returns(i,1) += cs * scaled_increase;

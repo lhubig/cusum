@@ -3,13 +3,13 @@
 #' @export
 #' @import checkmate
 #' @import stats
-#' @param failure_probability Accepted failure probability of process
-#' @param n_patients Sample size
-#' @param odds_multiplier Odds multiplier for the alternative hypothesis (<1 looks for decreases)
-#' @param n_simulation Number of simulations
-#' @param alpha False signal probability
-#' @param seed An optional seed for simulation
-#' @return Returns the CL
+#' @param failure_probability Double. Baseline failure probability
+#' @param n_patients Integer. Number of patients in monitoring period /sample size
+#' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
+#' @param n_simulation Integer. Number of simulation runs
+#' @param alpha Double. False signal probability of CUSUM
+#' @param seed Integer. Seed for RNG
+#' @return Returns the control limit for signalling performance change (double)
 #' @examples
 #'
 #' # simulate control limits for alpha = 0.05
@@ -31,9 +31,9 @@ cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_
   }
 
   n <- as.integer(n_patients)
-  assert_integer(n, lower = 1, any.missing = FALSE, len = 1)
+  assert_integer(as.integer(n_patients), lower = 1, any.missing = FALSE, len = 1)
 
-  assert_numeric(odds_multiplier, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
@@ -41,11 +41,11 @@ cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_
     warning("CUSUM detects no process change (odds_multiplier = 1).")
   }
 
-  assert_numeric(n_simulation, lower = 1, len = 1, finite = TRUE, any.missing = FALSE)
+  assert_integer(as.integer(n_simulation), lower = 1, any.missing = FALSE, len = 1)
+  
+  assert_numeric(alpha, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
 
-  assert_numeric(alpha, lower = 0, len = 1, finite = TRUE, any.missing = FALSE)
-
-  assert_numeric(as.numeric(seed), lower = 0, max.len = 1)
+  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, len = 1)
 
   ## Simulate CUSUM runs ####
   cs_sim <- function(i, npat = n, p = failure_probability, or = odds_multiplier) {
