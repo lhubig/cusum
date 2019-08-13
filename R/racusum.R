@@ -62,14 +62,15 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   patient_outcomes <- as.integer(patient_outcomes)
   assert_integer(patient_outcomes, lower = 0, upper = 1, any.missing = FALSE, min.len = 1)
 
-  limit_method <- match.arg(limit_method)
-  if (length(limit) == 1 & npat > 1 & limit_method == "dynamic") {
-    stop("Provide vector of limit if limit_method = dynamic. Else change to constant")
-  }
-
-  if (limit_method == "constant") {
+  if (!missing(limit_method)) {
+    warning("argument limit_method is deprecated and not needed anymore.", 
+            call. = FALSE)
+ }
+  
+  if (length(limit) == 1){
     limit <- rep(limit, length.out = npat)
   }
+  
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
