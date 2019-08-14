@@ -5,10 +5,10 @@
 \title{Grouped-CUSUM chart}
 \usage{
 gcusum(input_outcomes, failure_probability, odds_multiplier, limit,
-  max_num_shuffles, seed, quantiles)
+  max_num_shuffles, quantiles, seed = 0L)
 }
 \arguments{
-\item{input_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifer.}
+\item{input_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifier.}
 
 \item{failure_probability}{Double. Baseline failure probability}
 
@@ -18,9 +18,9 @@ gcusum(input_outcomes, failure_probability, odds_multiplier, limit,
 
 \item{max_num_shuffles}{Integer. Number of shuffles (i.e. different sequences of observations)}
 
-\item{seed}{Integer. Seed for RNG}
-
 \item{quantiles}{Double. Vector of requested quantiles of GCUSUM distribution}
+
+\item{seed}{Integer. Seed for RNG}
 }
 \value{
 gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.

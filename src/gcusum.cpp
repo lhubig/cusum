@@ -11,7 +11,7 @@ using namespace Rcpp;
 //' @title Grouped-CUSUM chart
 //' @description Calculate GCUSUM chart for non-risk-adjusted processes.
 //' 
-//' @param input_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifer.
+//' @param input_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifier.
 //' @param failure_probability Double. Baseline failure probability
 //' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
 //' @param limit Double. Control limit for signalling performance change
@@ -29,9 +29,9 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
                      double failure_probability, 
                      double odds_multiplier,
                      double limit, 
-                     int max_num_shuffles,
-                     int seed,
-                     NumericVector& quantiles) {
+                     NumericVector& quantiles,
+                     int max_num_shuffles = 10000,
+                     int seed = 0) {
   /*
    * Calculate GCUSUM for non-risk-adjusted processes
    *  
@@ -53,6 +53,10 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
   
   assert(input_outcomes.size() > 0);
   assert(input_outcomes(0,1) == 1);
+  
+  if (seed == 0){
+    seed = time(0);
+  }
   
   std::mt19937_64 generator(seed);
   
@@ -156,25 +160,27 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
 //' 
 //' @description Calculate GCUSUM chart for risk-adjusted processes.
 //' 
-//' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.
+//' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifier.
 //' @param limit Double. Control limit for signalling performance change
 //' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
 //' @param seed Integer. Seed for RNG
 //' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
 //' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
-//' @examples
+//' @example
 //' weight_s <- log((1) / (1 + ragcusum_example_data$score))
 //' weight_f <- log((2) / (1 + ragcusum_example_data$score))
-//' x <- ragcusum_example_data
-//' ra_outcomes <- matrix(c(x$y, weight_f, weight_s, x$block_identifier))
-//'   gs <- ragcusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
+//' y <- ragcusum_example_data$y
+//' block_identifier <- ragcusum_example_data$block_identifier
+//' ra_outcomes <- matrix(c(y, weight_f, weight_s, block_identifier), ncol = 4)
+//' gs <- ragcusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
+//' 
 //' @export
 // [[Rcpp::export(ragcusum)]]
 NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
-                       double limit, 
-                       int max_num_shuffles,
-                       int seed,
-                       NumericVector& quantiles) {
+                       double limit,
+                       NumericVector& quantiles,
+                       int max_num_shuffles = 10000,
+                       int seed = 0) {
   /*
    * Calculate GCUSUM for risk-adjusted processes. 
    * 
@@ -190,6 +196,9 @@ NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
   assert(ra_outcomes.size() > 0);
   assert(ra_outcomes(0,3) == 1);
   
+  if (seed == 0){
+    seed = time(0);
+  }
   std::mt19937_64 generator(seed);
   
   // connect outcomes and weights in tuple

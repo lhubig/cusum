@@ -7,7 +7,7 @@
 ragcusum(input_ra_outcomes, limit, max_num_shuffles, seed, quantiles)
 }
 \arguments{
-\item{input_ra_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifer.}
+\item{input_ra_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifier.}
 
 \item{limit}{Double. Control limit for signalling performance change}
 
@@ -22,11 +22,4 @@ ragcusum NumericMatix, signal probability, average CUSUM value and specified qua
 }
 \description{
 Calculate GCUSUM chart for risk-adjusted processes.
-}
-\examples{
-weight_s <- log((1) / (1 + ragcusum_example_data$score))
-weight_f <- log((2) / (1 + ragcusum_example_data$score))
-x <- ragcusum_example_data
-ra_outcomes <- matrix(c(x$y, weight_f, weight_s, x$block_identifier))
-  gs <- ragcusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
 }
