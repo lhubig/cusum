@@ -16,7 +16,7 @@ using namespace Rcpp;
 //' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
 //' @param limit Double. Control limit for signalling performance change
 //' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
-//' @param seed Integer. Seed for RNG
+//' @param seed Integer. Seed for RNG (if = 0 random seed is set (default))
 //' @param quantiles Double. Vector of requested quantiles of GCUSUM distribution
 //' @return gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
 //' @example 
@@ -163,7 +163,7 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
 //' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifier.
 //' @param limit Double. Control limit for signalling performance change
 //' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
-//' @param seed Integer. Seed for RNG
+//' @param seed Integer. Seed for RNG (if = 0 random seed is set (default))
 //' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
 //' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
 //' @example

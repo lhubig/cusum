@@ -4,18 +4,19 @@
 \alias{ragcusum}
 \title{RA-Grouped-CUSUM chart}
 \usage{
-ragcusum(input_ra_outcomes, limit, max_num_shuffles, seed, quantiles)
+ragcusum(input_ra_outcomes, limit, quantiles, max_num_shuffles = 10000L,
+  seed = 0L)
 }
 \arguments{
 \item{input_ra_outcomes}{Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifier.}
 
 \item{limit}{Double. Control limit for signalling performance change}
 
+\item{quantiles}{Double. Vector of requested quantiles of RA-GCUSUM distribution}
+
 \item{max_num_shuffles}{Integer. Number of shuffles (i.e. different sequences of observations)}
 
-\item{seed}{Integer. Seed for RNG}
-
-\item{quantiles}{Double. Vector of requested quantiles of RA-GCUSUM distribution}
+\item{seed}{Integer. Seed for RNG (if = 0 random seed is set (default))}
 }
 \value{
 ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.

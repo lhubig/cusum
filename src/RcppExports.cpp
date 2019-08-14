@@ -6,8 +6,8 @@
 using namespace Rcpp;
 
 // gcusum
-NumericMatrix gcusum(NumericMatrix& input_outcomes, double failure_probability, double odds_multiplier, double limit, int max_num_shuffles, NumericVector& quantiles, int seed);
-RcppExport SEXP _cusum_gcusum(SEXP input_outcomesSEXP, SEXP failure_probabilitySEXP, SEXP odds_multiplierSEXP, SEXP limitSEXP, SEXP max_num_shufflesSEXP, SEXP quantilesSEXP, SEXP seedSEXP) {
+NumericMatrix gcusum(NumericMatrix& input_outcomes, double failure_probability, double odds_multiplier, double limit, NumericVector& quantiles, int max_num_shuffles, int seed);
+RcppExport SEXP _cusum_gcusum(SEXP input_outcomesSEXP, SEXP failure_probabilitySEXP, SEXP odds_multiplierSEXP, SEXP limitSEXP, SEXP quantilesSEXP, SEXP max_num_shufflesSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -15,25 +15,25 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type failure_probability(failure_probabilitySEXP);
     Rcpp::traits::input_parameter< double >::type odds_multiplier(odds_multiplierSEXP);
     Rcpp::traits::input_parameter< double >::type limit(limitSEXP);
-    Rcpp::traits::input_parameter< int >::type max_num_shuffles(max_num_shufflesSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type quantiles(quantilesSEXP);
+    Rcpp::traits::input_parameter< int >::type max_num_shuffles(max_num_shufflesSEXP);
     Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
-    rcpp_result_gen = Rcpp::wrap(gcusum(input_outcomes, failure_probability, odds_multiplier, limit, max_num_shuffles, quantiles, seed));
+    rcpp_result_gen = Rcpp::wrap(gcusum(input_outcomes, failure_probability, odds_multiplier, limit, quantiles, max_num_shuffles, seed));
     return rcpp_result_gen;
 END_RCPP
 }
 // ragcusum
-NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes, double limit, int max_num_shuffles, int seed, NumericVector& quantiles);
-RcppExport SEXP _cusum_ragcusum(SEXP input_ra_outcomesSEXP, SEXP limitSEXP, SEXP max_num_shufflesSEXP, SEXP seedSEXP, SEXP quantilesSEXP) {
+NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes, double limit, NumericVector& quantiles, int max_num_shuffles, int seed);
+RcppExport SEXP _cusum_ragcusum(SEXP input_ra_outcomesSEXP, SEXP limitSEXP, SEXP quantilesSEXP, SEXP max_num_shufflesSEXP, SEXP seedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix& >::type input_ra_outcomes(input_ra_outcomesSEXP);
     Rcpp::traits::input_parameter< double >::type limit(limitSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type quantiles(quantilesSEXP);
     Rcpp::traits::input_parameter< int >::type max_num_shuffles(max_num_shufflesSEXP);
     Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
-    Rcpp::traits::input_parameter< NumericVector& >::type quantiles(quantilesSEXP);
-    rcpp_result_gen = Rcpp::wrap(ragcusum(input_ra_outcomes, limit, max_num_shuffles, seed, quantiles));
+    rcpp_result_gen = Rcpp::wrap(ragcusum(input_ra_outcomes, limit, quantiles, max_num_shuffles, seed));
     return rcpp_result_gen;
 END_RCPP
 }
