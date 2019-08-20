@@ -25,7 +25,7 @@ library(dplyr)
 
 ## Overview
 
-This vignette describes how to use GCUSUM charts, an extension to standard CUSUM charts for binary performance data grouped in sampels of unequal size. 
+This vignette describes how to use GCUSUM charts, an extension to standard CUSUM charts for binary performance data grouped in samples of unequal size. 
 
 ## Data preparation
 Following information have to be available:
@@ -50,7 +50,7 @@ head(ragcusum_example_data)
 
 ## Non-risk-adjusted GCUSUM chart
 
-Like in the standard CUSUM chart (vgl. vignette for CUSUM charts), parameters have to be estimated in order to set up the charts,  
+Like in the standard CUSUM chart (see vignette for CUSUM charts), parameters have to be estimated in order to set up the charts,  
 
 ```{r}
 failure_probability <- mean(gcusum_example_data$y[gcusum_example_data$year == 2016])
