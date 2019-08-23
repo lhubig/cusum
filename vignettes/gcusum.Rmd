@@ -29,11 +29,13 @@ This vignette describes how to use GCUSUM charts, an extension to standard CUSUM
 
 ## Data preparation
 Following information have to be available:
+
 * patient-individual outcomes
 * block-identifier in continuous sequence (can be obtain for example with `dplyr::group_indices()`)
 * (patient-individual risk scores / risk of adverse event/failure)
 
 These information are collected in a numeric matrix.
+
 Non-risk-adjusted example data:
 ```{r}
 head(gcusum_example_data)
