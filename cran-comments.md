@@ -1,12 +1,12 @@
 ---
 title: "cran-comments"
 author: "Lena Hubig"
-date: "17 June 2019"
+date: "23 August 2019"
 output: html_document
 ---
 ## Test environments
 * local Windows 7 Professional install, R 3.6.0
-* local Debian 9 on laptop, R.3.5.1
+* R-gub
 * win-builder (devel) 
 
 ## R CMD check results
