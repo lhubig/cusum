@@ -127,7 +127,7 @@ cusum_cs <- cusum(
   patient_outcomes,
   limit = cusum_limit,
   odds_multiplier = 2,
-  reset = TRUE)
+  reset = FALSE)
   
 plot(cusum_cs)
 ```
@@ -219,4 +219,30 @@ print(racusum_alpha)
 ```
 
 We see that _racusum_alpha_ is similar to our previously defined false signal probability of 0.05. Deviation is possible due to a slight change in risk population.
+
+## CUSUM Chart for process improvement
+
+CUSUM charts for detecting process improvements can be constructed similarly, but the CUSUM statistic is restricted to non-positive values.
+```{r}
+
+cusum_limit_improve <- cusum_limit_sim(failure_probability,
+                                       n_patients,
+                                       odds_multiplier = .5,
+                                       n_simulation = 1000, 
+                                       alpha = 0.5,
+                                       seed = 2046)
+cusum_cs_improve <- cusum(failure_probability, 
+                          patient_outcomes = cusum_example_p2$y,
+                          limit = cusum_limit_improve,
+                          odds_multiplier = .5)
+
+plot(cusum_cs_improve)
+
+cusum_alpha_sim(failure_probability,
+                n_patients,
+                odds_multiplier = 0.5,
+                n_simulation = 1000,
+                limit = cusum_limit_improve,
+                seed = 2046)
+```
 
