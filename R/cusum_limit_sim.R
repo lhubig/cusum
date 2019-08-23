@@ -57,9 +57,17 @@ cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_
     y <- rbinom(npat, 1, p.0)
     w.t <- y * log(p.1 / p.0) + (1 - y) * log((1 - p.1) / (1 - p.0))
     c.t <- vector(mode = "numeric", length = npat)
-    c.t[1] <- max(c(0, c.t[1] + w.t[1]))
-    for (i in 2:npat) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
-    return(max(c.t))
+    if (or > 1){
+      c.t[1] <- max(c(0, c.t[1] + w.t[1]))
+      for (i in 2:npat) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
+      return(max(c.t))
+    } else {
+      c.t[1] <- min(c(0, c.t[1] - w.t[1]))
+      for (i in 2:npat) c.t[i] <- min(c(0, c.t[i - 1] - w.t[i]))
+      return(min(c.t))
+    }
+    
+    
   }
 
   suppressWarnings(RNGversion("3.5.0"))

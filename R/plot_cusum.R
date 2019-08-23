@@ -33,10 +33,10 @@ plot.cusum <- function(x, signal = TRUE, ...) {
     points(
       x = x$t[x$signal == 1],
       y = x$ct[x$signal == 1],
-      col = "red",
-      cex = 2,
+      col = "orange",
+      cex = 1.8,
       pch = 8,
-      lwd = 5
+      lwd = 4.5
     )
   }
   

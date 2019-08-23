@@ -6,7 +6,7 @@
 #' @import stats
 #' @import graphics
 #' @param patient_risks Double. Vector of patient risk scores (individual risk of adverse event)
-#' @param patient_outcomes Integer. Vector of binary patient outcomes (0,1) 
+#' @param patient_outcomes Integer. Vector of binary patient outcomes (0,1)
 #' @param limit Double. Control limit for signalling performance change
 #' @param odds_multiplier Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)
 #' @param reset Logical. Reset the CUSUM after a signal to 0; defaults to TRUE
@@ -63,20 +63,21 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   assert_integer(patient_outcomes, lower = 0, upper = 1, any.missing = FALSE, min.len = 1)
 
   if (!missing(limit_method)) {
-    warning("argument limit_method is deprecated and not needed anymore.", 
-            call. = FALSE)
- }
-  
-  if (length(limit) == 1){
+    warning("argument limit_method is deprecated and not needed anymore.",
+      call. = FALSE
+    )
+  }
+
+  if (length(limit) == 1) {
     limit <- rep(limit, length.out = npat)
   }
-  
+
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
-    
-    if (limit > 0){
+
+    if (limit > 0) {
       warning("Control limit should be negative to signal process improvements.")
     }
   }
@@ -104,21 +105,30 @@ racusum <- function(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
   for (ii in 1:npat) {
     if (odds_multiplier > 1) {
       ct <- max(0, ct + w[ii])
+
+      if (ct >= limit[ii]) {
+        # test for signal
+        cs[ii, 4] <- 1 # store signal
+        cs[, 5] <- limit[ii]
+        if (reset == 1) ct <- 0
+      } else {
+        cs[ii, 4] <- 0
+      }
     } else if (odds_multiplier < 1) {
       ct <- min(0, ct - w[ii])
-    }    
+
+      if (ct <= limit[ii]) {
+        # test for signal
+        cs[ii, 4] <- 1 # store signal
+        cs[, 5] <- limit[ii]
+        if (reset == 1) ct <- 0
+      } else {
+        cs[ii, 4] <- 0
+      }
+    }
     cs[ii, 1] <- ii # store patient id
     cs[ii, 2] <- p[ii] # store patient risk
     cs[ii, 3] <- ct # store CUSUM value
-    if (ct >= limit[ii]) {
-      # test for signal
-      cs[ii, 4] <- 1 # store signal
-      cs[, 5] <- limit[ii]
-      if (reset == 1) ct <- 0
-    }
-    else {
-      cs[ii, 4] <- 0
-    }
   }
 
 

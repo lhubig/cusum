@@ -74,9 +74,16 @@ racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alph
 
     w.t <- ifelse(y == 1, wf, ws)
     c.t <- vector(mode = "numeric", length = n)
-    c.t[1] <- max(c(0, c.t[1] + w.t[1]))
-    for (i in 2:n) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
-    return(max(c.t))
+    
+    if (odds_multiplier > 1){
+      c.t[1] <- max(c(0, c.t[1] + w.t[1]))
+      for (i in 2:n) c.t[i] <- max(c(0, c.t[i - 1] + w.t[i]))
+      return(max(c.t))
+    } else {
+      c.t[1] <- min(c(0, c.t[1] - w.t[1]))
+      for (i in 2:n) c.t[i] <- min(c(0, c.t[i - 1] - w.t[i]))
+      return(min(c.t))
+    }
   }
   suppressWarnings(RNGversion("3.5.0"))
 
