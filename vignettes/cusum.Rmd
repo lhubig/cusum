@@ -116,6 +116,8 @@ cusum_cs <- cusum(
   reset = FALSE)
   
 head(cusum_cs)
+plot(cusum_cs)
+
 ```
 
 
@@ -127,7 +129,7 @@ cusum_cs <- cusum(
   patient_outcomes,
   limit = cusum_limit,
   odds_multiplier = 2,
-  reset = FALSE)
+  reset = TRUE)
   
 plot(cusum_cs)
 ```
