@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.dim = c(7,5)
+  fig.dim = c(7, 5)
 )
 
 library(cusum)
@@ -90,11 +90,11 @@ Then, control limits can be simulated using _cusum_limit_sim_.
 ```{r}
 
 cusum_limit <- cusum_limit_sim(failure_probability,
-                            n_patients,
-                            odds_multiplier = 2,
-                            n_simulation = 1000,
-                            alpha = 0.05,
-                            seed = 2046)
+                               n_patients,
+                               odds_multiplier = 2, 
+                               n_simulation = 1000,
+                               alpha = 0.05,
+                               seed = 2046)
 
 
 print(cusum_limit)
@@ -108,29 +108,26 @@ Monitoring via CUSUM charts is applied on performance data from 2017 (Phase II) 
 patient_outcomes <- cusum_example_p2$y
 
 
-cusum_cs <- cusum(
-  failure_probability,
-  patient_outcomes,
-  limit = cusum_limit,
-  odds_multiplier = 2,
-  reset = FALSE)
-  
+cusum_cs <- cusum(failure_probability,
+                  patient_outcomes,
+                  limit = cusum_limit,
+                  odds_multiplier = 2,
+                  reset = FALSE)
+
 head(cusum_cs)
 plot(cusum_cs)
-
 ```
 
 
 Performance is as expected during the first half of monitoring, and then deteriorates. We get a signal at t=`r sig <- cusum_cs$t[cusum_cs$signal==1]; sig[1]`. If reset==TRUE, the CUSUM resets after each signal.
 
 ```{r}
-cusum_cs <- cusum(
-  failure_probability,
-  patient_outcomes,
-  limit = cusum_limit,
-  odds_multiplier = 2,
-  reset = TRUE)
-  
+cusum_cs <- cusum(failure_probability,
+                  patient_outcomes,
+                  limit = cusum_limit,
+                  odds_multiplier = 2,
+                  reset = TRUE)
+
 plot(cusum_cs)
 ```
 
@@ -140,14 +137,12 @@ The false signal probability of a CUSUM chart can be simulated using _cusum_alph
 ```{r}
 n_patients <- nrow(cusum_example_p2)
 
-cusum_alpha <- cusum_alpha_sim(
-  failure_probability,
-  n_patients,
-  odds_multiplier = 2,
-  n_simulation = 1000,
-  limit = cusum_limit,
-  seed = 2046
-)
+cusum_alpha <- cusum_alpha_sim(failure_probability,
+                               n_patients,
+                               odds_multiplier = 2,
+                               n_simulation = 1000,
+                               limit = cusum_limit,
+                               seed = 2046)
 
 print(cusum_alpha)
 ```
@@ -171,14 +166,14 @@ racusum_limit <- racusum_limit_sim(patient_risks,
                                    n_simulation = 1000,
                                    alpha = 0.05,
                                    seed = 2046)
-  
+
 print(racusum_limit)
 ```
 
 ### Applying RA-CUSUM charts
 Monitoring via RA-CUSUM chart is applied on performance data from 2017 (Phase II) and the control limit _racusum_limit_. It can be calculated using _racusum_.
 ```{r}
-patient_risks <- racusum_example_p2$score 
+patient_risks <- racusum_example_p2$score
 
 patient_outcomes <- racusum_example_p2$y
 
@@ -209,13 +204,11 @@ plot(racusum_cs)
 The false signal probability of a CUSUM chart can be simulated using _cusum_alpha_sim_.
 
 ```{r}
-racusum_alpha <- racusum_alpha_sim(
-  patient_risks,
-  odds_multiplier = 2,
-  n_simulation = 1000,
-  limit = racusum_limit,
-  seed = 2046
-)
+racusum_alpha <- racusum_alpha_sim(patient_risks,
+                                   odds_multiplier = 2,
+                                   n_simulation = 1000,
+                                   limit = racusum_limit,
+                                   seed = 2046)
 
 print(racusum_alpha)
 ```
@@ -230,10 +223,10 @@ CUSUM charts for detecting process improvements can be constructed similarly, bu
 cusum_limit_improve <- cusum_limit_sim(failure_probability,
                                        n_patients,
                                        odds_multiplier = .5,
-                                       n_simulation = 1000, 
-                                       alpha = 0.5,
-                                       seed = 2046)
-cusum_cs_improve <- cusum(failure_probability, 
+                                       n_simulation = 1000,
+                                       alpha = 0.5,seed = 2046)
+
+cusum_cs_improve <- cusum(failure_probability,
                           patient_outcomes = cusum_example_p2$y,
                           limit = cusum_limit_improve,
                           odds_multiplier = .5)
