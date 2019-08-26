@@ -30,13 +30,15 @@ plot.cusum <- function(x, signal = TRUE, ...) {
   )
 
   if (signal == TRUE) {
+    #p_signal <- which(x$signal == 1)  - 1
+    p_signal <- which(x$signal == 1)
     points(
-      x = x$t[x$signal == 1],
-      y = x$ct[x$signal == 1],
+      x = x$t[p_signal],
+      y = x$ct[p_signal],
       col = "orange",
       cex = 1.8,
       pch = 8,
-      lwd = 4.5
+      lwd = 2.5 
     )
   }
   
