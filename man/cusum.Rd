@@ -6,8 +6,8 @@
 \alias{cusum-package}
 \title{Non-risk-adjusted CUSUM Charts}
 \usage{
-cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
-  reset = TRUE)
+cusum(failure_probability, patient_outcomes, limit, weights = NA,
+  odds_multiplier = 2, reset = TRUE)
 }
 \arguments{
 \item{failure_probability}{Double. Baseline failure probability}
@@ -15,6 +15,8 @@ cusum(failure_probability, patient_outcomes, limit, odds_multiplier = 2,
 \item{patient_outcomes}{Integer. Vector of binary patient outcomes (0,1)}
 
 \item{limit}{Double. Control limit for signalling performance change}
+
+\item{weights}{Double. Optional vector of weights, if empty, standard CUSUM weights are calculated with weights_t}
 
 \item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 

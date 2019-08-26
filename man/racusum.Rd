@@ -4,8 +4,9 @@
 \alias{racusum}
 \title{Risk-adjusted CUSUM Charts}
 \usage{
-racusum(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
-  reset = TRUE, limit_method = c("constant", "dynamic"))
+racusum(patient_risks, patient_outcomes, limit, weights = NA,
+  odds_multiplier = 2, reset = TRUE, limit_method = c("constant",
+  "dynamic"))
 }
 \arguments{
 \item{patient_risks}{Double. Vector of patient risk scores (individual risk of adverse event)}
@@ -13,6 +14,8 @@ racusum(patient_risks, patient_outcomes, limit, odds_multiplier = 2,
 \item{patient_outcomes}{Integer. Vector of binary patient outcomes (0,1)}
 
 \item{limit}{Double. Control limit for signalling performance change}
+
+\item{weights}{Double. Optional vector of weights, if empty, standard CUSUM weights are calculated with weights_t}
 
 \item{odds_multiplier}{Double. Odds multiplier of adverse event under the alternative hypothesis (<1 looks for decreases)}
 

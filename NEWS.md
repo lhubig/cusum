@@ -3,6 +3,7 @@
 ### New features
 * new function to calculate grouped CUSUM (GCUSUM) for risk-adjusted and non-risk-adjusted processes
 * vignette describing gcusum-functions
+* custom weights can be passed to cusum and racusum functions
 
 # cusum 0.3.0 (2019/06/17)
 
