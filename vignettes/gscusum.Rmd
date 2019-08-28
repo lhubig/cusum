@@ -1,10 +1,10 @@
 ---
-title: "GCUSUM charts"
+title: "GSCUSUM charts"
 author: "Lena Hubig"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{GCUSUM charts}
+  %\VignetteIndexEntry{GSCUSUM charts}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,7 +25,7 @@ library(dplyr)
 
 ## Overview
 
-This vignette describes how to use GCUSUM charts, an extension to standard CUSUM charts for binary performance data grouped in samples of unequal size. 
+This vignette describes how to use GSCUSUM charts, an extension to standard CUSUM charts for binary performance data grouped in samples of unequal size. 
 
 ## Data preparation
 Following information have to be available:
@@ -38,7 +38,7 @@ These information are collected in a numeric matrix.
 
 Non-risk-adjusted example data:
 ```{r}
-head(gcusum_example_data)
+head(gscusum_example_data)
 
 
 
@@ -46,18 +46,18 @@ head(gcusum_example_data)
 
 Risk-adjusted example data:
 ```{r}
-head(ragcusum_example_data)
+head(ragscusum_example_data)
 
 ```
 
-## Non-risk-adjusted GCUSUM chart
+## Non-risk-adjusted GSCUSUM chart
 
 Like in the standard CUSUM chart (see vignette for CUSUM charts), parameters have to be estimated in order to set up the charts,  
 
 ```{r}
-failure_probability <- mean(gcusum_example_data$y[gcusum_example_data$year == 2016])
+failure_probability <- mean(gscusum_example_data$y[gscusum_example_data$year == 2016])
 
-n_patients <- nrow(gcusum_example_data[gcusum_example_data$year == 2016,])
+n_patients <- nrow(gscusum_example_data[gscusum_example_data$year == 2016,])
 ```
 
 and control limits have to be estimated:
@@ -75,15 +75,15 @@ cusum_limit <- cusum_limit_sim(failure_probability,
 print(cusum_limit)
 ```
 
-GCUSUM charts are constructed on performance data from 2017.
+GSCUSUM charts are constructed on performance data from 2017.
 ```{r}
 
-gcusum_data <- gcusum_example_data[gcusum_example_data$year == 2017,]
+gscusum_data <- gscusum_example_data[gscusum_example_data$year == 2017,]
 
-input_outcomes <- matrix(c(gcusum_data$y, gcusum_data$block_identifier), ncol = 2)
+input_outcomes <- matrix(c(gscusum_data$y, gscusum_data$block_identifier), ncol = 2)
 
 
-gcs <- gcusum(input_outcomes = input_outcomes,
+gcs <- gscusum(input_outcomes = input_outcomes,
               failure_probability = failure_probability,
               odds_multiplier = 2,
               limit = cusum_limit,
@@ -145,25 +145,25 @@ p <- p +
   scale_y_continuous(name = "CUSUM Distribution") +
   scale_x_continuous(name = "Sequence of Observations") +
   scale_fill_manual(values = palette, guide = FALSE) +
-  labs(subtitle = "GCUSUM")
+  labs(subtitle = "GSCUSUM")
 p
 ```
 
 
 
-## Risk-adjusted GCUSUM chart
+## Risk-adjusted GSCUSUM chart
 
 Like in the standard RA-CUSUM chart (see vignette for CUSUM charts), parameters are estimated in order to set up the charts,  
 
 ```{r}
-n_patients <- nrow(ragcusum_example_data[ragcusum_example_data$year == 2016,])
+n_patients <- nrow(ragscusum_example_data[ragscusum_example_data$year == 2016,])
 ```
 
 and control limits are set:
 
 ```{r}
 
-racusum_limit <- racusum_limit_sim(patient_risks = ragcusum_example_data$score[ragcusum_example_data$year == 2016],
+racusum_limit <- racusum_limit_sim(patient_risks = ragscusum_example_data$score[ragscusum_example_data$year == 2016],
                             odds_multiplier = 2,
                             n_simulation = 1000,
                             alpha = 0.05,
@@ -173,15 +173,15 @@ racusum_limit <- racusum_limit_sim(patient_risks = ragcusum_example_data$score[r
 print(racusum_limit)
 ```
 
-GCUSUM charts are constructed on performance data from 2017.
+GSCUSUM charts are constructed on performance data from 2017.
 ```{r}
 
-ragcusum_data <- ragcusum_example_data[ragcusum_example_data$year == 2017,]
+ragscusum_data <- ragscusum_example_data[ragscusum_example_data$year == 2017,]
 
-input_outcomes <- matrix(c(gcusum_data$y, gcusum_data$block_identifier), ncol = 2)
+input_outcomes <- matrix(c(gscusum_data$y, gscusum_data$block_identifier), ncol = 2)
 
 
-gcs <- gcusum(input_outcomes = input_outcomes,
+gcs <- gscusum(input_outcomes = input_outcomes,
               failure_probability = failure_probability,
               odds_multiplier = 2,
               limit = cusum_limit,
@@ -243,7 +243,7 @@ p <- p +
   scale_y_continuous(name = "RACUSUM Distribution") +
   scale_x_continuous(name = "Sequence of Observations") +
   scale_fill_manual(values = palette, guide = FALSE) +
-  labs(subtitle = "RA-GCUSUM")
+  labs(subtitle = "RA-GSCUSUM")
 p
 ```
 

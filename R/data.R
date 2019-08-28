@@ -34,7 +34,7 @@
 #' Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
 "racusum_example_data"
 
-#' Grouped Non-Risk-adjusted Performance Data with Block Identifier
+#' Group-sequential Non-Risk-adjusted Performance Data with Block Identifier
 #'
 #' Generated performance data of indicator 17/1 54030: Preoperative stay over 24 hours for patients with proximal femur fracture. 
 #' 
@@ -51,10 +51,10 @@
 #' @source Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany.
 #'
 #' Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/17n1hftfrak/QSKH_17n1-HUEFTFRAK_2016_QIDB_V02_2017-04-26.pdf}
-"gcusum_example_data"
+"gscusum_example_data"
 
 
-#' Grouped Risk-adjusted Performance Data with Block Identifier
+#' Group-sequential Risk-adjusted Performance Data with Block Identifier
 #'
 #' Generated performance data of indicator: Ratio of observed to expected cases of severe stroke or death under open carotid stenosis surgery.
 #'
@@ -72,4 +72,4 @@
 #' @source Data for simulation was provided by Bavarian Agency of Quality Assurance (BAQ), Munich Germany.
 #'
 #' Description of performance indicator (in German): \url{https://iqtig.org/downloads/auswertung/2016/10n2karot/QSKH_10n2-KAROT_2016_QIDB_V02_2017-04-26.pdf}
-"ragcusum_example_data"
+"ragscusum_example_data"

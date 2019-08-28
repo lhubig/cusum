@@ -7,9 +7,9 @@ using namespace Rcpp;
 
 // [[Rcpp::plugins(cpp11)]]
 
-//' @name gcusum
-//' @title Grouped-CUSUM chart
-//' @description Calculate GCUSUM chart for non-risk-adjusted processes.
+//' @name gscusum
+//' @title Group-sequential CUSUM chart
+//' @description Calculate GSCUSUM chart for non-risk-adjusted processes.
 //' 
 //' @param input_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are continuous sequence of block identifier.
 //' @param failure_probability Double. Baseline failure probability
@@ -17,15 +17,15 @@ using namespace Rcpp;
 //' @param limit Double. Control limit for signalling performance change
 //' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
 //' @param seed Integer. Seed for RNG (if = 0 random seed is set (default))
-//' @param quantiles Double. Vector of requested quantiles of GCUSUM distribution
-//' @return gcusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
+//' @param quantiles Double. Vector of requested quantiles of GSCUSUM distribution
+//' @return gscusum matrix, signal probability, average CUSUM value and specified quantiles for every observation.
 //' @example 
-//' input_outcomes <- matrix(c(gcusum_example_data$y, gcusum_example_data$block_identifier), ncol = 2)
-//' gs <- gcusum(input_outcomes = input_outcomes, failure_probability = 0.2, odds_multiplier = 2, limit = 2, max_num_shuffles = 1000,  seed = 2098,  quantiles = c(0,0.25,0.5,0.75,1))
+//' input_outcomes <- matrix(c(gscusum_example_data$y, gscusum_example_data$block_identifier), ncol = 2)
+//' gs <- gscusum(input_outcomes = input_outcomes, failure_probability = 0.2, odds_multiplier = 2, limit = 2, max_num_shuffles = 1000,  seed = 2098,  quantiles = c(0,0.25,0.5,0.75,1))
 //' 
 //' @export
-// [[Rcpp::export(gcusum)]]
-NumericMatrix gcusum(NumericMatrix& input_outcomes,
+// [[Rcpp::export(gscusum)]]
+NumericMatrix gscusum(NumericMatrix& input_outcomes,
                      double failure_probability, 
                      double odds_multiplier,
                      double limit, 
@@ -33,7 +33,7 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
                      int max_num_shuffles = 10000,
                      int seed = 0) {
   /*
-   * Calculate GCUSUM for non-risk-adjusted processes
+   * Calculate GSCUSUM for non-risk-adjusted processes
    *  
    * input_outcomes: first column outcomes, second column block id (continuous)
    * failure_probability: baseline failure probability
@@ -155,34 +155,34 @@ NumericMatrix gcusum(NumericMatrix& input_outcomes,
 }
 
 
-//' @name ragcusum
+//' @name ragscusum
 //' @title RA-Grouped-CUSUM chart
 //' 
-//' @description Calculate GCUSUM chart for risk-adjusted processes.
+//' @description Calculate GSCUSUM chart for risk-adjusted processes.
 //' 
 //' @param input_ra_outcomes Matrix. First column are binary patient outcomes (0,1). Second column are patient individual weight for adverse event (failure) and third column patient individual weight for no adverse event (success). Fourth column are continuous sequence of block identifier.
 //' @param limit Double. Control limit for signalling performance change
 //' @param max_num_shuffles Integer. Number of shuffles (i.e. different sequences of observations)
 //' @param seed Integer. Seed for RNG (if = 0 random seed is set (default))
-//' @param quantiles Double. Vector of requested quantiles of RA-GCUSUM distribution
-//' @return ragcusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
+//' @param quantiles Double. Vector of requested quantiles of RA-GSCUSUM distribution
+//' @return ragscusum NumericMatix, signal probability, average CUSUM value and specified quantiles for every observation.
 //' @example
-//' weight_s <- log((1) / (1 + ragcusum_example_data$score))
-//' weight_f <- log((2) / (1 + ragcusum_example_data$score))
-//' y <- ragcusum_example_data$y
-//' block_identifier <- ragcusum_example_data$block_identifier
+//' weight_s <- log((1) / (1 + ragscusum_example_data$score))
+//' weight_f <- log((2) / (1 + ragscusum_example_data$score))
+//' y <- ragscusum_example_data$y
+//' block_identifier <- ragscusum_example_data$block_identifier
 //' ra_outcomes <- matrix(c(y, weight_f, weight_s, block_identifier), ncol = 4)
-//' gs <- ragcusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
+//' gs <- ragscusum(ra_outcomes,limit = 2,max_num_shuffles = 1000,seed = 1008,quantiles = c(0,0.5,1))
 //' 
 //' @export
-// [[Rcpp::export(ragcusum)]]
-NumericMatrix ragcusum(NumericMatrix& input_ra_outcomes,
+// [[Rcpp::export(ragscusum)]]
+NumericMatrix ragscusum(NumericMatrix& input_ra_outcomes,
                        double limit,
                        NumericVector& quantiles,
                        int max_num_shuffles = 10000,
                        int seed = 0) {
   /*
-   * Calculate GCUSUM for risk-adjusted processes. 
+   * Calculate GSCUSUM for risk-adjusted processes. 
    * 
    * input_ra_outcomes: 
    *     0: outcomes in 0 and 1
