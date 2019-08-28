@@ -41,7 +41,7 @@ racusum_limit_dpcl <- function(patient_risks, N = 100000, odds_multiplier = 2, a
 
   assert_numeric(alpha, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
   
-  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, len = 1)
+  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, max.len = 1)
   
   cs <- 0
 

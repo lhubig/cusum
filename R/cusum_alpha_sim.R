@@ -48,7 +48,7 @@ cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_
   
   assert_numeric(limit, finite = TRUE, any.missing = FALSE, len = 1)
   
-  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, len = 1)
+  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, max.len = 1)
   
   ## Simulate CUSUM Charts ####
   cs_sim <- function(i, npat = n_patients, p = failure_probability, or = odds_multiplier) {
