@@ -51,40 +51,40 @@
 #'   patient_outcomes,
 #'   limit = 2.96
 #' )
-racusum <- function(patient_risks, patient_outcomes, limit, weights = NA, odds_multiplier = 2, reset = TRUE, limit_method = c("constant", "dynamic")) {
+racusum <- function(patient_risks, patient_outcomes, limit, weights = NULL, odds_multiplier = 2, reset = TRUE, limit_method = c("constant", "dynamic")) {
   npat <- length(patient_risks)
-
+  
   ## Check user input ####
   assert_numeric(patient_risks, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
   if (length(patient_risks) != length(patient_outcomes)) {
     stop("Length patient_risks and patient_outcomes of unequal size.")
   }
   
-  if (!is.na(weights)){
-    assert_numeric(weights, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
+  if (length(weights) > 0){
+    assert_numeric(weights, lower = -1, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
     if (length(weights) != length(patient_outcomes)) {
       stop("Length weights and patient outcomes of unequal size.")
     }
   }
-
+  
   patient_outcomes <- as.integer(patient_outcomes)
   assert_integer(patient_outcomes, lower = 0, upper = 1, any.missing = FALSE, min.len = 1)
-
+  
   if (!missing(limit_method)) {
     warning("argument limit_method is deprecated and not needed anymore.",
-      call. = FALSE
+            call. = FALSE
     )
   }
-
+  
   if (length(limit) == 1) {
     limit <- rep(limit, length.out = npat)
   }
-
-
+  
+  
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
     # message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
-
+    
     if (mean(limit) > 0) {
       warning("Control limit should be negative to signal process improvements.")
     }
@@ -92,17 +92,24 @@ racusum <- function(patient_risks, patient_outcomes, limit, weights = NA, odds_m
   if (odds_multiplier == 1) {
     # warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
   }
-
-
+  if (odds_multiplier > 1){
+    if (mean(limit) < 0) {
+      warning("Control limit should be positive to signal process deteriorations.")
+    }
+  }
+  
+  
   assert_logical(reset, any.missing = FALSE, len = 1)
 
   ## Calculate RA-CUSUM Chart ####
   npat <- length(patient_risks)
   
-  if (is.na(weights)){
+  if (length(weights) == 0){
     w <- weights_t(patient_outcomes,
                    probability_ae = patient_risks,
                    odds_multiplier)
+  } else {
+    w <- weights
   }
   
   ct <- 0 # initial CUSUM value

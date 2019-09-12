@@ -4,7 +4,7 @@
 \alias{racusum}
 \title{Risk-adjusted CUSUM Charts}
 \usage{
-racusum(patient_risks, patient_outcomes, limit, weights = NA,
+racusum(patient_risks, patient_outcomes, limit, weights = NULL,
   odds_multiplier = 2, reset = TRUE, limit_method = c("constant",
   "dynamic"))
 }
