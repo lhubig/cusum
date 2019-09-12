@@ -38,7 +38,7 @@
 #'   patient_outcomes,
 #'   limit = 2.96
 #' )
-cusum <- function(failure_probability, patient_outcomes, limit, weights = NA, odds_multiplier = 2, reset = TRUE) {
+cusum <- function(failure_probability, patient_outcomes, limit, weights = NULL, odds_multiplier = 2, reset = TRUE) {
 
   ## Check user input ####
   assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
@@ -52,8 +52,8 @@ cusum <- function(failure_probability, patient_outcomes, limit, weights = NA, od
 
   assert_numeric(limit, finite = TRUE, any.missing = FALSE, len = 1)
 
-  if (!is.na(weights)){
-    assert_numeric(weights, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
+  if (length(weights) > 0){
+    assert_numeric(weights, lower = -1, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
     if (length(weights) != length(patient_outcomes)) {
       stop("Length weights and patient outcomes of unequal size.")
     }
@@ -83,11 +83,14 @@ cusum <- function(failure_probability, patient_outcomes, limit, weights = NA, od
 
   ct <- 0
   cs <- matrix(0, nrow = npat, ncol = 5)
+  
 
-  if (is.na(weights)){
+  if (length(weights) == 0){
     w <-  weights_t(patient_outcomes,
                     probability_ae = failure_probability,
                     odds_multiplier)
+  } else {
+    w <- weights
   }
 
 
