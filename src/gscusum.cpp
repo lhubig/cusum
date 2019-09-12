@@ -76,7 +76,7 @@ NumericMatrix gscusum(NumericMatrix& input_outcomes,
         working_element.second = i;
         block_boundaries.push_back(working_element);
         working_element.first = i;
-        assert(current_id + 1 = input_outcomes(i,1));
+        assert(current_id + 1 == input_outcomes(i,1));
         current_id = input_outcomes(i,1);
       }
     }
@@ -193,8 +193,8 @@ NumericMatrix ragscusum(NumericMatrix& input_ra_outcomes,
    * max_num_shuffle: maximum number of shuffles of one data block (can be smaller for n_b <= 5)
    * seed: for generator
    */
-  assert(ra_outcomes.size() > 0);
-  assert(ra_outcomes(0,3) == 1);
+  assert(input_ra_outcomes.size() > 0);
+  assert(input_ra_outcomes(0,3) == 1);
   
   if (seed == 0){
     seed = time(0);
@@ -219,7 +219,7 @@ NumericMatrix ragscusum(NumericMatrix& input_ra_outcomes,
         working_element.second = i;
         block_boundaries.push_back(working_element);
         working_element.first = i;
-        assert(current_id + 1 = input_ra_outcomes(i,3));
+        assert(current_id + 1 == input_ra_outcomes(i,3));
         current_id = input_ra_outcomes(i,3);
       }
     }
