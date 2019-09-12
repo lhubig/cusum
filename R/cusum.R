@@ -68,8 +68,12 @@ cusum <- function(failure_probability, patient_outcomes, limit, weights = NA, od
     }
   }
   if (odds_multiplier == 1) {
-    warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
-    stop()
+    stop("CUSUM is set to detect no process change (odds_multiplier = 1).")
+  } 
+  if (odds_multiplier > 1){
+    if (limit < 0) {
+      warning("Control limit should be positive to signal process deteriorations.")
+    }
   }
 
   assert_logical(reset, any.missing = FALSE, len = 1)
