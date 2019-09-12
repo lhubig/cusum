@@ -1,6 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.org/lhubig/cusum.svg?branch=master)](https://travis-ci.org/lhubig/cusum)
+[![Codecov test
+coverage](https://codecov.io/gh/lhubig/cusum/branch/master/graph/badge.svg)](https://codecov.io/gh/lhubig/cusum?branch=master)
+<!-- badges: end -->
+
 # cusum
 
 The goal of cusum is to provide functions for constructing and
