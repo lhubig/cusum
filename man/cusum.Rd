@@ -6,7 +6,7 @@
 \alias{cusum-package}
 \title{Non-risk-adjusted CUSUM Charts}
 \usage{
-cusum(failure_probability, patient_outcomes, limit, weights = NA,
+cusum(failure_probability, patient_outcomes, limit, weights = NULL,
   odds_multiplier = 2, reset = TRUE)
 }
 \arguments{
