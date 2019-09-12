@@ -26,7 +26,8 @@ Suggests:
     knitr,
     dplyr,
     ggplot2,
-    rmarkdown
+    rmarkdown,
+    covr
 LinkingTo: Rcpp
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
