@@ -38,7 +38,7 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
-    message("CUSUM detects process improvements (odds_multiplier < 1). ")
+   # message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
   if (odds_multiplier == 1) {
     warning("CUSUM detects no process change (odds_multiplier = 1).")
@@ -95,5 +95,9 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
 
   ## Estimate false signal probability ####
   x <- ecdf(unlist(rl))
-  return(1 - x(limit))
+  if (odds_multiplier > 1){
+    return(1 - x(limit))
+  } else {
+      return(x(limit))
+    }
 }

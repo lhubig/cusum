@@ -61,7 +61,7 @@ cusum <- function(failure_probability, patient_outcomes, limit, weights = NA, od
   
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
-    message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
+   # message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
 
     if (limit > 0) {
       warning("Control limit should be negative to signal process improvements.")

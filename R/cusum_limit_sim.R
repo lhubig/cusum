@@ -35,7 +35,7 @@ cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
-    message("CUSUM detects process improvements (odds_multiplier < 1). ")
+    #message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
   if (odds_multiplier == 1) {
     warning("CUSUM detects no process change (odds_multiplier = 1).")
@@ -76,7 +76,12 @@ cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_
   rl <- lapply(1:n_simulation, cs_sim)
 
   ## Estimate Alpha ####
-  cl <- quantile(unlist(rl), 1 - alpha)
+  if (odds_multiplier > 1){
+    cl <- quantile(unlist(rl), 1 - alpha)
+    
+  } else {
+    cl <- quantile(unlist(rl), alpha)
+  }
 
   return(as.numeric(cl))
 }

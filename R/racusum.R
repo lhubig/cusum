@@ -83,14 +83,14 @@ racusum <- function(patient_risks, patient_outcomes, limit, weights = NA, odds_m
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
   if (odds_multiplier < 1) {
-    message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
+    # message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
 
-    if (limit > 0) {
+    if (mean(limit) > 0) {
       warning("Control limit should be negative to signal process improvements.")
     }
   }
   if (odds_multiplier == 1) {
-    warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
+    # warning("CUSUM is set to detect no process change (odds_multiplier = 1).")
   }
 
 
