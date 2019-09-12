@@ -28,8 +28,8 @@ test_that("Warning for recoding failure_prob",
                             odds_multiplier = 2, 
                             reset = TRUE), 
                       gives_warning()
-                      )
           )
+)
 
 test_that("Error if number of patients and weights don't match",
           expect_that(cusum(failure_probability = .1, 
@@ -39,8 +39,8 @@ test_that("Error if number of patients and weights don't match",
                             reset = TRUE,
                             weights = 0.1), 
                       throws_error()
-                      )
           )
+)
 
 test_that("Warning if CL is not same direction as OM 1",
           expect_that(cusum(failure_probability = .1, 

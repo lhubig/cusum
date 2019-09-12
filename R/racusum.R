@@ -100,7 +100,7 @@ racusum <- function(patient_risks, patient_outcomes, limit, weights = NULL, odds
   
   
   assert_logical(reset, any.missing = FALSE, len = 1)
-
+  
   ## Calculate RA-CUSUM Chart ####
   npat <- length(patient_risks)
   
@@ -113,11 +113,11 @@ racusum <- function(patient_risks, patient_outcomes, limit, weights = NULL, odds
   }
   
   ct <- 0 # initial CUSUM value
- 
+  
   cs <- matrix(0, nrow = npat, ncol = 5) # storage matrix for alarms
   # p <- patient_risks
   # 
-   # 
+  # 
   # # CUSUM weights
   # ws <- log((1 - p + 1 * p) / (1 - p + odds_multiplier * p))
   # wf <- log(((1 - p + 1 * p) * odds_multiplier) / ((1 - p + odds_multiplier * p) * 1))

@@ -22,14 +22,14 @@
 #'   seed = 2046
 #' )
 cusum_limit_sim <- function(failure_probability, n_patients, odds_multiplier, n_simulation, alpha, seed = NULL) {
-
+  
   ## Check user input ####
   assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
   if (failure_probability > 0.5) {
     failure_probability <- 1 - failure_probability
     warning("Accepted failure probability failure_probability will be recoded to 1-failure_probability when > 0.5.")
   }
-
+  
   n <- as.integer(n_patients)
   assert_integer(as.integer(n_patients), lower = 1, any.missing = FALSE, len = 1)
 

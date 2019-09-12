@@ -12,10 +12,10 @@ test_that("CUSUM", {
   expected_results <- c(0, 0, 0, 0, 0, 0, 0.51, 1.02, 1.53, 1.53)
   works <-
     racusum(patient_risks,
-      patient_outcomes = outcomes,
-      limit = 2.96,
-      odds_multiplier = 2,
-      reset = TRUE
+            patient_outcomes = outcomes,
+            limit = 2.96,
+            odds_multiplier = 2,
+            reset = TRUE
     )
   result <- round(works$ct, 2)
   expect_equal(result, expected_results)
@@ -28,7 +28,7 @@ test_that("Error if number of patients and patient risks don't match",
                               odds_multiplier = 2,
                               reset = TRUE
           ), 
-                      throws_error()
+          throws_error()
           )
 )
 
