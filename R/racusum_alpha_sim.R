@@ -37,16 +37,26 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
   assert_numeric(patient_risks, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, min.len = 1)
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
-  if (odds_multiplier < 1) {
-   # message("CUSUM detects process improvements (odds_multiplier < 1). ")
-  }
-  if (odds_multiplier == 1) {
-    warning("CUSUM detects no process change (odds_multiplier = 1).")
-  }
-
+  
   assert_integer(as.integer(n_simulation), lower = 1, any.missing = FALSE, len = 1)
   
   assert_numeric(limit, finite = TRUE, any.missing = FALSE, len = 1)
+  if (odds_multiplier < 1) {
+    # message("CUSUM is set to detect process improvements (odds_multiplier < 1). ")
+    
+    if (limit > 0) {
+      warning("Control limit should be negative to signal process improvements.")
+    }
+  }
+  if (odds_multiplier == 1) {
+    stop("CUSUM is set to detect no process change (odds_multiplier = 1).")
+  } 
+  if (odds_multiplier > 1){
+    if (limit < 0) {
+      warning("Control limit should be positive to signal process deteriorations.")
+    }
+  }
+  
   
   assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, max.len = 1)
   
