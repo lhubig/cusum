@@ -57,8 +57,7 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
     }
   }
   
-  
-  assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, max.len = 1)
+    assert_integer(as.integer(seed), lower = 0, upper = Inf, any.missing = TRUE, max.len = 1)
   
   ## Calculate risk distribution ####
   n <- length(patient_risks)
