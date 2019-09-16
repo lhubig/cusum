@@ -17,7 +17,6 @@ weights_t <- function(patient_outcomes,
     assert_numeric(probability_ae, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
     if (probability_ae > 0.5) {
       probability_ae <- 1 - probability_ae
-      warning("Baseline failure probability probability_ae will be recoded to 1 - probability_ae when > 0.5.")
     }
     ## non-risk-adjusted
 
