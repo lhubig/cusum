@@ -35,18 +35,17 @@ cusum_limit_exact <- function(n_patients,
     warning("Baseline failure probability failure_probability will be recoded to 1 - failure_probability when > 0.5.")
   }
 
-  assert_integer(as.integer(n_patients), lower = 1,upper  = 20, any.missing = FALSE, len = 1)
-  
-  if (n_patients > 15) {
+  assert_integer(as.integer(n_patients), lower = 1, any.missing = FALSE, len = 1)
+  if (n_patients > 20) {
+    stop("Exact calculation only works for very small sample sizes of around <= 10 (check ?cusum_limit_exact for more information). \nPlease abort if calculation takes to long. ")
+  } else if (n_patients > 12) {
     message("Exact calculation only works for very small sample sizes of around <= 10 (check ?cusum_limit_exact for more information). \nPlease abort if calculation takes to long. ")
   }
 
-  assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
-  if (odds_multiplier < 1) {
-    message("CUSUM detects process improvements (odds_multiplier < 1). ")
-  }
+  assert_numeric(odds_multiplier, lower = 1, finite = TRUE, any.missing = FALSE, len = 1)
+
   if (odds_multiplier == 1) {
-    warning("CUSUM detects no process change (odds_multiplier = 1).")
+    stop("CUSUM detects no process change (odds_multiplier = 1).")
   }
 
   assert_numeric(alpha, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
