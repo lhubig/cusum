@@ -95,7 +95,6 @@ racusum_alpha_sim <- function(patient_risks, odds_multiplier, n_simulation, limi
       for (i in 2:n) c.t[i] <- min(c(0, c.t[i - 1] - w.t[i]))
       return(min(c.t))
     }
-    return(max(c.t))
   }
 
   suppressWarnings(RNGversion("3.5.0"))
