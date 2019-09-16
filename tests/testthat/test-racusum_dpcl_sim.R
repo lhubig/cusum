@@ -1,4 +1,4 @@
-context("cusum")
+context("racusum_dpcl_sim")
 
 risks <- c(0.001, 0.01, 0.1, 0.002, 0.02, 0.2)
 
