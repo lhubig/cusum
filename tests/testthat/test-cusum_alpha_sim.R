@@ -53,17 +53,17 @@ test_that("Warning if CL is not same direction as OM 2",
             limit = - 2.96,
             seed = 2046
           ), 
-                      gives_warning())
+          gives_warning())
 )
 test_that("Error if OM = 1",
-          expect_that(cusum_alpha_sim(failure_probability = .1, 
-                            n_patients = 100, 
-                            limit = 2.96,
-                            odds_multiplier = 1,
-                            n_simulation = 1000,
-                            limit = 2.96,
-                            seed = 2046), 
-                      throws_error())
+          expect_that(cusum_alpha_sim(
+            failure_probability = 0.1,
+            n_patients = 100,
+            odds_multiplier = 1,
+            n_simulation = 1000,
+            limit = 2,
+            seed = 2046), 
+            throws_error())
 )
 
 test_that("Warning for recoding failure_prob",

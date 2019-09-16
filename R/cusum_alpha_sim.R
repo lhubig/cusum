@@ -37,12 +37,6 @@ cusum_alpha_sim <- function(failure_probability, n_patients, odds_multiplier, n_
   assert_integer(as.integer(n_patients), lower = 1, any.missing = FALSE, len = 1)
 
   assert_numeric(odds_multiplier, lower = 0, finite = TRUE, any.missing = FALSE, len = 1)
-  if (odds_multiplier < 1) {
-    # message("CUSUM detects process improvements (odds_multiplier < 1). ")
-  }
-  if (odds_multiplier == 1) {
-    stop("CUSUM detects no process change (odds_multiplier = 1).")
-  }
 
   assert_integer(as.integer(n_simulation), lower = 1, any.missing = FALSE, len = 1)
   
