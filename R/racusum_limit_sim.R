@@ -39,7 +39,7 @@ racusum_limit_sim <- function(patient_risks, odds_multiplier, n_simulation, alph
    # message("CUSUM detects process improvements (odds_multiplier < 1). ")
   }
   if (odds_multiplier == 1) {
-    warning("CUSUM detects no process change (odds_multiplier = 1).")
+    stop("CUSUM detects no process change (odds_multiplier = 1).")
   }
 
   assert_integer(as.integer(n_simulation), lower = 1, any.missing = FALSE, len = 1)
