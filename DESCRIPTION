@@ -23,6 +23,7 @@ Imports:
     Rcpp
 Suggests:
     testthat,
+    vdiffr,
     knitr,
     dplyr,
     ggplot2,
