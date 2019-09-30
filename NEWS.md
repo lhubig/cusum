@@ -1,7 +1,6 @@
 # cusum 0.4.1 (2019/09/30)
 
 ### Bug fixes
-
 * improved passing of custom weights
 * `alpha` calculation works correctly for process improvements
 
