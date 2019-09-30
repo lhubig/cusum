@@ -5,3 +5,5 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^cran-comments.md$
+^\.travis\.yml$
+^codecov\.yml$
