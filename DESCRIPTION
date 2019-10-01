@@ -24,11 +24,10 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    dplyr,
     ggplot2,
     vdiffr,
-    rmarkdown
-Enhances: 
+    rmarkdown,
+Enhances:
     covr
 LinkingTo: Rcpp
 VignetteBuilder: knitr
