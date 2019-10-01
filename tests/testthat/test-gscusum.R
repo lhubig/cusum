@@ -15,11 +15,11 @@ test_that("GSCUSUM results", {
   exp_sig <- rep(0, 10)
   expect_equal(observed[,1], exp_sig)
   
-  exp_mean <- c(0,0,0,0,0,0.11,0.17,0.2,0.2,0.19)
-  expect_equal(round(observed[,2],2), exp_mean)
+  exp_mean <- c(0,0,0,0,0,0.106,0.169,0.199,0.198,0.193)
+  expect_equal(round(observed[,2],3), exp_mean)
   
-  exp_med <- c(0,0,0,0,0,0,0,0.15,0.15,0.15)
-  expect_equal(round(observed[,3],2), exp_med)
+  exp_med <- c(0,0,0,0,0,0,0,0.146,0.146,0.146)
+  expect_equal(round(observed[,3],3), exp_med)
   
   
 })
