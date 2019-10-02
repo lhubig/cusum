@@ -31,7 +31,9 @@ cs <- cusum(failure_probability = 0.1,
             odds_multiplier = 2,
             reset = FALSE)
 
-disp_cs <- function() plot(cs)
-disp_new <- function()  plot(cs$t, cs$ct, type = "l")
-vdiffr::expect_doppelganger("CUSUM plot", disp_cs)
-vdiffr::expect_doppelganger("Test plot", disp_new)
+if(requireNamespace("vdiffr")){
+  disp_cs <- function() plot(cs)
+  disp_new <- function()  plot(cs$t, cs$ct, type = "l")
+  vdiffr::expect_doppelganger("CUSUM plot", disp_cs)
+  vdiffr::expect_doppelganger("Test plot", disp_new)
+}
