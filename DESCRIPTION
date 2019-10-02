@@ -25,9 +25,9 @@ Suggests:
     testthat,
     knitr,
     ggplot2,
-    vdiffr,
-    rmarkdown,
+    rmarkdown
 Enhances:
+    vdiffr,
     covr
 LinkingTo: Rcpp
 VignetteBuilder: knitr
