@@ -1,7 +1,7 @@
 Package: cusum
 Title: Cumulative Sum (CUSUM) Charts for Monitoring of Hospital Performance
 Version: 0.4.1
-Date: 2019-10-01
+Date: 2019-10-02
 Authors@R: c(
     person("Lena", "Hubig", 
     email = "cs@lenahubig.de", 

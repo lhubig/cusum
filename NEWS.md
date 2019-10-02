@@ -1,4 +1,4 @@
-# cusum 0.4.1 (2019/10/01)
+# cusum 0.4.1 (2019/10/02)
 
 ### Bug fixes
 * improved passing of custom weights
