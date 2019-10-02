@@ -11,15 +11,15 @@ test_that("GSCUSUM results", {
                       odds_multiplier = 2,
                       limit = 3,
                       quantiles = (0.5),
-                      max_num_shuffles = 10,
+                      max_num_shuffles = 1000,
                       seed = 2910)
   exp_sig <- rep(0, 10)
   expect_equal(observed[,1], exp_sig)
   
-  exp_mean <- c(0.000, 0.000, 0.000, 0.000, 0.000, 0.051, 0.135, 0.131, 0.113, 0.303)
-  expect_equal(round(observed[,2],3), exp_mean)
+  exp_mean <- c(0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.2, 0.2, 0.2, 0.2)
+  expect_equal(round(observed[,2],1), exp_mean)
   
-  exp_med <- c(0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.328)
-  expect_equal(round(observed[,3],3), exp_med)
+  exp_med <- c(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.1, 0.1)
+  expect_equal(round(observed[,3],1), exp_med)
 })
 
