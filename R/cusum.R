@@ -44,8 +44,10 @@ cusum <- function(failure_probability, patient_outcomes, limit, weights = NULL, 
   assert_numeric(failure_probability, lower = 0, upper = 1, finite = TRUE, any.missing = FALSE, len = 1)
   if (failure_probability > 0.5) {
     failure_probability <- 1 - failure_probability
+    patient_outcomes <- !patient_outcomes
     warning("Accepted failure probability failure_probability will be recoded to 1-failure_probability when > 0.5.")
   }
+  
 
   patient_outcomes <- as.integer(patient_outcomes)
   assert_integer(patient_outcomes, lower = 0, upper = 1, any.missing = FALSE, min.len = 1)

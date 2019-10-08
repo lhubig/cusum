@@ -42,6 +42,12 @@ NumericMatrix gscusum(NumericMatrix& input_outcomes,
    * max_num_shuffles: number of shuffles for observation groups
    * seed: for RNG
    */
+  if (failure_probability > .5){
+    failure_probability = 1-.5;
+    for(int i = 0; i != input_outcomes.nrow(); ++i) {
+      input_outcomes(i,0) = !input_outcomes(i,0);
+    }
+  }
   
   // calculate alternative probability of failure
   double odds_A = odds_multiplier * failure_probability/(1-failure_probability);;
