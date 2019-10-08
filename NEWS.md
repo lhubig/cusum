@@ -1,3 +1,12 @@
+# cusum 0.4.2 (2019/10/07)
+
+### Bug fixes
+* negating TRUE and FALSE if failure probability > 0.5
+
+##### To Do
+* failure probbailiby > 0.5 in gscusum?
+
+
 # cusum 0.4.1 (2019/10/02)
 
 ### Bug fixes
